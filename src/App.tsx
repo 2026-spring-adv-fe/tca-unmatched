@@ -40,7 +40,7 @@ function App() {
 
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -48,7 +48,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -56,7 +56,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -64,7 +64,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -72,7 +72,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -80,7 +80,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -88,7 +88,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
