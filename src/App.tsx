@@ -9,6 +9,7 @@ function App() {
   return (
     <div
       className='p-3'
+      data-theme='cupcake'
     >
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -40,7 +41,7 @@ function App() {
 
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -48,7 +49,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -56,7 +57,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -64,7 +65,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
@@ -72,7 +73,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
 
@@ -86,7 +87,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
 
@@ -193,7 +194,7 @@ function App() {
       </div>
 
 
-      <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-5">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
 
