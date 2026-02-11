@@ -9,6 +9,7 @@ function App() {
   return (
     <div
       className='p-3'
+      data-theme='cupcake'
     >
       <div>
         <a href="https://vite.dev" target="_blank">
