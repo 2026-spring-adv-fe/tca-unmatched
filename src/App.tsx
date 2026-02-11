@@ -53,37 +53,37 @@ function App() {
         </div>
       </div>
 
-            <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body">
           <h2 className="card-title">Card title!</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
         </div>
       </div>
 
-            <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body">
           <h2 className="card-title">Card title!</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
         </div>
       </div>
 
-            <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body">
           <h2 className="card-title">Card title!</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
         </div>
       </div>
 
-            <div className="card bg-base-100 w-full shadow-lg my-3">
+      <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body">
           <h2 className="card-title">Card title!</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
         </div>
       </div>
 
-            <div className="card bg-base-100 w-full shadow-lg my-3">
-        <div className="card-body">
-          <h2 className="card-title">Card title!</h2>
+      <div className="card bg-base-100 w-full shadow-lg my-3 overflow-x-hidden">
+        <div className="card-body p-2">
+          <h2 className="card-title text-nowrap123">Card title but really really really really long!</h2>
           <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
         </div>
       </div>
