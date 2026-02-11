@@ -24,7 +24,7 @@ function App() {
         Vite + React
       </h1>
       <div className="card">
-        <button 
+        <button
           onClick={() => setCount((count) => count + 1)}
           className='btn btn-outline btn-primary btn-lg w-full lg:w-32 my-5'
         >
@@ -37,6 +37,56 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+
+      <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+      <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
+
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+        <div className="card-body">
+          <h2 className="card-title">Card title!</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        </div>
+      </div>
     </div>
   )
 }
