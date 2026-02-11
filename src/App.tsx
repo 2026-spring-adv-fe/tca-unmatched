@@ -75,7 +75,13 @@ function App() {
       <div className="card bg-base-100 w-full shadow-lg my-3">
         <div className="card-body p-2">
           <h2 className="card-title">Leaderboard</h2>
-          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+
+
+          {/* For TSX uncomment the commented types below */}
+          <span className="countdown font-mono text-6xl">
+            <span style={{ "--value": count, "--digits": 2 } as React.CSSProperties} aria-live="polite">{count}</span>
+          </span>
+
         </div>
       </div>
 
