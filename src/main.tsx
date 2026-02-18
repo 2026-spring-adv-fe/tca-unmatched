@@ -5,9 +5,6 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App 
-      initialCountValue={10}
-      // foo="Tom was here..."
-    />
+    <App />
   </StrictMode>,
 )
