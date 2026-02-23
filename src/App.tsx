@@ -36,9 +36,25 @@ const dummyGameResults: GameResult[] = [
 
 const App = () => {
 
+  //
+  // React hooks...
+  //
   const [gameResults, setGameResults] = useState(dummyGameResults);
   // const [gameResults, setGameResults] = useState([]);
 
+  //
+  // Calculated state and other funcs...
+  //
+  const addNewGameResult = (gameResult: GameResult) => setGameResults(
+    [
+      ...gameResults,
+      gameResult,
+    ]
+  );
+
+  //
+  // Return JSX...
+  //
   return (
     <div>
       <HashRouter>
@@ -62,7 +78,11 @@ const App = () => {
           <Route 
             path='/play'
             element={
-              <Play />
+              <Play 
+                addNewGameResult={
+                  addNewGameResult
+                }
+              />
             }
           />          
         </Routes>
