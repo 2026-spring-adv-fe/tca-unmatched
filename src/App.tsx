@@ -58,41 +58,50 @@ const App = () => {
   // Return JSX...
   //
   return (
-    <div>
-      <HashRouter>
-        <Routes>
-          <Route 
-            path='/'
-            element={
-              <Home
-                generalFacts={
-                  getGeneralFacts(gameResults)
-                }
-                mostPopularFirstMove={
-                  getMostPopularFirstMoveColumn(gameResults)
-                }
-              />
-            }
-          />
-          <Route 
-            path='/setup'
-            element={
-              <Setup />
-            }
-          />
-          <Route 
-            path='/play'
-            element={
-              <Play 
-                addNewGameResult={
-                  addNewGameResult
-                }
-              />
-            }
-          />          
-        </Routes>
-      </HashRouter>
-    </div>
+    <HashRouter>
+      <div className="min-h-screen bg-base-200">
+        <div className="navbar bg-base-100 shadow-sm px-4 md:px-6">
+          <div className="flex-1">
+            <div className="text-xl font-bold">
+              TCA Unmatched
+            </div>
+          </div>
+        </div>
+        <main className="mx-auto w-full max-w-5xl px-4 py-6 md:px-6 md:py-8">
+          <Routes>
+            <Route 
+              path='/'
+              element={
+                <Home
+                  generalFacts={
+                    getGeneralFacts(gameResults)
+                  }
+                  mostPopularFirstMove={
+                    getMostPopularFirstMoveColumn(gameResults)
+                  }
+                />
+              }
+            />
+            <Route 
+              path='/setup'
+              element={
+                <Setup />
+              }
+            />
+            <Route 
+              path='/play'
+              element={
+                <Play 
+                  addNewGameResult={
+                    addNewGameResult
+                  }
+                />
+              }
+            />          
+          </Routes>
+        </main>
+      </div>
+    </HashRouter>
   )
 }
 

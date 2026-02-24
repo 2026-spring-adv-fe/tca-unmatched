@@ -22,8 +22,8 @@ export const Home: React.FC<HomeProps> = ({
 
     // Then return JSX...
     return (
-        <>
-            <h1>
+        <div className="mx-auto w-full max-w-3xl space-y-4">
+            <h1 className="text-3xl font-bold">
                 Home
             </h1>
             <button 
@@ -35,7 +35,7 @@ export const Home: React.FC<HomeProps> = ({
                 Setup a Game
             </button>
             <div className="card bg-base-100 w-full shadow-lg my-3">
-                <div className="card-body p-2">
+                <div className="card-body p-4">
                     <h2 className="card-title">General Facts</h2>
                     <div className="overflow-x-auto">
                         <table className="table table-zebra">
@@ -62,11 +62,11 @@ export const Home: React.FC<HomeProps> = ({
                 </div>
             </div>
             <div className="card bg-base-100 w-full shadow-lg my-3">
-                <div className="card-body p-2">
+                <div className="card-body p-4">
                     <h2 className="card-title">Most Popular First Move</h2>
                     <p>{mostPopularFirstMove}</p>
                 </div>
             </div>
-        </>
+        </div>
     );
 };

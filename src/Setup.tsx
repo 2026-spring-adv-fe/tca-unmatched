@@ -8,7 +8,7 @@ export const Setup = () => {
     // Then return JSX...
     return (
         <>
-            <h1>
+            <h1 className="text-3xl font-bold">
                 Setup
             </h1>
             <button 

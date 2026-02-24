@@ -17,7 +17,7 @@ export const Play: React.FC<PlayProps> = ({
     // Then return JSX...
     return (
         <>
-            <h1>
+            <h1 className="text-3xl font-bold">
                 Play
             </h1>
             <button 
