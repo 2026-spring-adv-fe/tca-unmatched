@@ -67,7 +67,7 @@ export const getMostPopularFirstMoveColumn = (
 
   const grouped = Map.groupBy(firstMoveColumns, (column) => column);
 
-  if (grouped.size === 0) return "";
+    if (grouped.size === 0) return "N/A";
 
   const maxCount = Math.max(...Array.from(grouped.values(), (cols) => cols.length));
 

@@ -34,6 +34,12 @@ export const Home: React.FC<HomeProps> = ({
             >
                 Setup a Game
             </button>
+            <div className="card bg-base-100 w-full shadow-lg my-3">
+                <div className="card-body p-2">
+                    <h2 className="card-title">Most Popular First Move</h2>
+                    <p>{mostPopularFirstMove}</p>
+                </div>
+            </div>
         </>
     );
 };
