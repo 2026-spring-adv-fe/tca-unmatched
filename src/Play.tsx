@@ -32,6 +32,7 @@ export const Play: React.FC<PlayProps> = ({
                             ],
                             start: startTimestamp,
                             end: new Date().toISOString(),
+                            firstMoveColumn: 7,
                         });
                         nav(-2);
                     }
