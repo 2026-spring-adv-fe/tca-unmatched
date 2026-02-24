@@ -1,3 +1,5 @@
+import { durationFormatter } from "human-readable";
+
 //
 // Exported type definitions...
 //
@@ -53,10 +55,10 @@ export const getGeneralFacts = (games: GameResult[]): GeneralFacts => {
     // );
 
     return {
-        lastPlayed: `${mostRecentlyPlayedInMilliseconds / 1000 / 60 / 60/ 24} days ago`,
+        lastPlayed: `${formatLastPlayedDuration(mostRecentlyPlayedInMilliseconds)} ago`,
         totalGames: games.length,
-        shortestGame: `${Math.min(...gameDurationsInMilliseconds) / 1000 / 60} minutes`,
-        longestGame: `${Math.max(...gameDurationsInMilliseconds) / 1000 / 60} minutes`,
+        shortestGame: formatGameDuration(Math.min(...gameDurationsInMilliseconds)),
+        longestGame: formatGameDuration(Math.max(...gameDurationsInMilliseconds)),
     };
 };
 
@@ -81,3 +83,12 @@ export const getMostPopularFirstMoveColumn = (
 //
 // Helper funcs...
 //
+const formatLastPlayedDuration = durationFormatter<string>({
+    allowMultiples: ["y", "mo", "d"],
+    keepNonLeadingZeroes: false,
+});
+
+const formatGameDuration = durationFormatter<string>({
+    allowMultiples: ["h", "m", "s"],
+    keepNonLeadingZeroes: false,
+});
