@@ -74,6 +74,7 @@ export const getMostPopularFirstMove = (
   
   const mostPopularMoves = Array.from(groupedMoves.entries())
     .filter(([_, gamesWithMove]) => gamesWithMove.length === maxCount)
+    .sort(([moveA], [moveB]) => moveA - moveB)
     .map(([move, gamesWithMove]) => `Column ${move} (${gamesWithMove.length})`)
     .join(", ");
 

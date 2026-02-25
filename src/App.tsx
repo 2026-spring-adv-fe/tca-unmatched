@@ -7,7 +7,7 @@ import {
 import { Home } from './Home';
 import { Setup } from './Setup';
 import { Play } from './Play';
-import { getGeneralFacts, type GameResult } from './GameResults';
+import { getGeneralFacts, getMostPopularFirstMove, type GameResult } from './GameResults';
 import { useState } from 'react';
 
 
@@ -21,6 +21,7 @@ const dummyGameResults: GameResult[] = [
         ],
         start: "2026-02-01T18:53:59.078Z",
         end: "2026-02-01T19:27:59.078Z",
+        firstMove: 4,
     },
     {
         winner: "Hermione",
@@ -31,6 +32,7 @@ const dummyGameResults: GameResult[] = [
         ],
         start: "2026-01-15T22:07:59.078Z",
         end: "2026-01-15T23:01:59.078Z",
+        firstMove: 4,
     },  
 ];
 
@@ -65,7 +67,10 @@ const App = () => {
               <Home
                 generalFacts={
                   getGeneralFacts(gameResults)
-                } 
+                }
+                popularMove={
+                  getMostPopularFirstMove(gameResults)
+                }
               />
             }
           />
