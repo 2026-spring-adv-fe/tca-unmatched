@@ -1,12 +1,16 @@
 //
 // Exported type definitions...
 //
+type ConnectFourColumn = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export type GameResult = {
     winner: string;
     players: string[];
 
     start: string;
     end: string;
+
+    firstMove: ConnectFourColumn;
 };
 
 export type GeneralFacts = {
@@ -55,6 +59,26 @@ export const getGeneralFacts = (games: GameResult[]): GeneralFacts => {
         longestGame: `${Math.max(...gameDurationsInMilliseconds) / 1000 / 60} minutes`,
     };
 };
+
+export const getMostPopularFirstMove = (
+    games: GameResult[]
+): string => {
+
+    if (!games || games.length === 0) {
+    return "N/A";
+  }
+
+  const groupedMoves = Map.groupBy(games, game => game.firstMove);
+
+  const maxCount = Math.max(...Array.from(groupedMoves.values()).map(g => g.length));
+  
+  const mostPopularMoves = Array.from(groupedMoves.entries())
+    .filter(([_, gamesWithMove]) => gamesWithMove.length === maxCount)
+    .map(([move, gamesWithMove]) => `Column ${move} (${gamesWithMove.length})`)
+    .join(", ");
+
+  return mostPopularMoves;
+}
 
 //
 // Helper funcs...
