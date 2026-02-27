@@ -7,7 +7,7 @@ import {
 import { Home } from './Home';
 import { Setup } from './Setup';
 import { Play } from './Play';
-import { getGeneralFacts, getMostPopularFirstMove, type GameResult } from './GameResults';
+import { getGeneralFacts, getMostPopularFirstMove, getGamesPlayedLeaderboard, type GameResult } from './GameResults';
 import { useState } from 'react';
 
 
@@ -70,6 +70,9 @@ const App = () => {
                 }
                 popularMove={
                   getMostPopularFirstMove(gameResults)
+                }
+                leaderboard={
+                  getGamesPlayedLeaderboard(gameResults)
                 }
               />
             }
