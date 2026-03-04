@@ -7,7 +7,11 @@ import {
 import { Home } from './Home';
 import { Setup } from './Setup';
 import { Play } from './Play';
-import { getGeneralFacts, type GameResult } from './GameResults';
+import { 
+  getGeneralFacts, 
+  getLeaderboard, 
+  type GameResult, 
+} from './GameResults';
 import { useState } from 'react';
 
 
@@ -40,7 +44,7 @@ const App = () => {
   // React hooks...
   //
   const [gameResults, setGameResults] = useState(dummyGameResults);
-  // const [gameResults, setGameResults] = useState([]);
+  // const [gameResults, setGameResults] = useState<GameResult[]>([]);
 
   //
   // Calculated state and other funcs...
@@ -66,6 +70,9 @@ const App = () => {
                 generalFacts={
                   getGeneralFacts(gameResults)
                 } 
+                leaderboard={
+                  getLeaderboard(gameResults)
+                }
               />
             }
           />
