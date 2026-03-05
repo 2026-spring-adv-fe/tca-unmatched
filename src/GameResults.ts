@@ -83,7 +83,7 @@ export const getMostPopularFirstMove = (
 
 export type GamesPlayedLeaderboardEntry = {
     player: string;
-    gamesPlayed: number;
+    gp: number;
 };
 
 export const getGamesPlayedLeaderboard = (games: GameResult[]): GamesPlayedLeaderboardEntry[] => {
@@ -96,8 +96,8 @@ export const getGamesPlayedLeaderboard = (games: GameResult[]): GamesPlayedLeade
     }
 
     return Array.from(counts.entries())
-        .map(([player, gamesPlayed]) => ({ player, gamesPlayed }))
-        .sort((a, b) => b.gamesPlayed - a.gamesPlayed || a.player.localeCompare(b.player));
+        .map(([player, gp]) => ({ player, gp }))
+        .sort((a, b) => b.gp - a.gp || a.player.localeCompare(b.player));
 };
 
 //

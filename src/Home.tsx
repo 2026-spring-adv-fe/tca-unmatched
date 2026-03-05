@@ -74,19 +74,19 @@ export const Home: React.FC<HomeProps> = ({
             </div>
             <div className="card bg-base-100 w-full shadow-lg my-5">
                 <div className="card-body p-2">
-                    <h2 className="card-title">Games Played Leaderboard</h2>
+                    <h2 className="card-title">GP Leaderboard</h2>
                     <table className="table table-zebra">
                         <thead>
                             <tr>
                                 <th>Player</th>
-                                <th>Games Played</th>
+                                <th>GP</th>
                             </tr>
                         </thead>
                         <tbody>
                             {leaderboard.map(entry => (
                                 <tr key={entry.player}>
                                     <td>{entry.player}</td>
-                                    <td>{entry.gamesPlayed}</td>
+                                    <td>{entry.gp}</td>
                                 </tr>
                             ))}
                         </tbody>
