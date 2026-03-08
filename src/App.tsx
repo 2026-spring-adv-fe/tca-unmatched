@@ -12,7 +12,8 @@ import {
   getLeaderboard,
   type GameResult,
 } from './GameResults';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import localforage from 'localforage';
 
 
 const dummyGameResults: GameResult[] = [
@@ -47,7 +48,27 @@ const App = () => {
   // const [gameResults, setGameResults] = useState<GameResult[]>([]);
 
   const [title, setTitle] = useState(APP_TITLE);
-  const [darkMode, setDarkMode] = useState("light");
+  const [theme, setTheme] = useState("light");
+
+  useEffect(
+    () => {
+      const loadTheme = async () => {
+
+        const result = await localforage.getItem<string>("theme") ?? "light";
+        if (!ignore) {
+          setTheme(result);
+        }
+      }
+
+      let ignore = false;
+      loadTheme();
+
+      return () => {
+        ignore = true;
+      }
+    }, 
+    [],
+  );
 
   //
   // Calculated state and other funcs...
@@ -65,7 +86,7 @@ const App = () => {
   return (
     <div
       className='min-h-screen'
-      data-theme={darkMode}
+      data-theme={theme}
     >
       <div
         className="navbar bg-neutral text-neutral-content flex"
@@ -83,11 +104,19 @@ const App = () => {
           {/* this hidden checkbox controls the state */}
           <input 
             type="checkbox"
-            onClick={() => setDarkMode(
-              darkMode === "light"
-                ? "dark"
-                : "light"
-            )}             
+            onClick={async () => {
+
+              const savedTheme = await localforage.setItem(
+                "theme",
+                theme === "light"
+                  ? "dark"
+                  : "light",
+              );
+
+              setTheme(
+                savedTheme
+              );
+            }}             
           />
 
           {/* sun icon */}
