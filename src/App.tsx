@@ -70,39 +70,43 @@ const App = () => {
           UM Companion
         </p>
       </div>
-      <HashRouter>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Home
-                generalFacts={
-                  getGeneralFacts(gameResults)
-                }
-                leaderboard={
-                  getLeaderboard(gameResults)
-                }
-              />
-            }
-          />
-          <Route
-            path='/setup'
-            element={
-              <Setup />
-            }
-          />
-          <Route
-            path='/play'
-            element={
-              <Play
-                addNewGameResult={
-                  addNewGameResult
-                }
-              />
-            }
-          />
-        </Routes>
-      </HashRouter>
+      <div 
+        className="px-3"
+      >
+        <HashRouter>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <Home
+                  generalFacts={
+                    getGeneralFacts(gameResults)
+                  }
+                  leaderboard={
+                    getLeaderboard(gameResults)
+                  }
+                />
+              }
+            />
+            <Route
+              path='/setup'
+              element={
+                <Setup />
+              }
+            />
+            <Route
+              path='/play'
+              element={
+                <Play
+                  addNewGameResult={
+                    addNewGameResult
+                  }
+                />
+              }
+            />
+          </Routes>
+        </HashRouter>
+      </div>
     </div>
   )
 }

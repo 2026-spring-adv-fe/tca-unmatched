@@ -7,18 +7,17 @@ export const Setup = () => {
 
     // Then return JSX...
     return (
-        <>
-            <h1>
-                Setup
-            </h1>
+        <div
+            className="py-3"
+        >
             <button 
-                className="btn btn-primary btn-outline"
+                className="btn btn-soft btn-lg w-full lg:w-64"
                 onClick={
                     () => nav('/play')
                 }
             >
                 Start the Game
             </button>
-        </>
+        </div>
     );
 };
