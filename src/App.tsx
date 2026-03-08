@@ -182,21 +182,16 @@ const themes = [
     },
 ];
 
-const getNextThemeInCurrentMode = (currentTheme: string) => {
+const getNextThemeWithinMode = (currentTheme: string) => {
   const currentThemeData = themes.find(x => x.theme === currentTheme) ?? themes[0];
   const sameModeThemes = themes.filter(x => x.dark === currentThemeData.dark);
-  const oppositeModeThemes = themes.filter(x => x.dark !== currentThemeData.dark);
   const currentModeIndex = sameModeThemes.findIndex(x => x.theme === currentThemeData.theme);
 
   if (currentModeIndex < 0) {
     return sameModeThemes[0]?.theme ?? "light";
   }
 
-  if (currentModeIndex === sameModeThemes.length - 1) {
-    return oppositeModeThemes[0]?.theme ?? "light";
-  }
-
-  return sameModeThemes[currentModeIndex + 1]?.theme ?? "light";
+  return sameModeThemes[(currentModeIndex + 1) % sameModeThemes.length]?.theme ?? "light";
 };
 
 const isDarkTheme = (themeName: string) => {
@@ -216,6 +211,11 @@ const getThemeNumberInMode = (themeName: string) => {
   return (modeIndex >= 0 ? modeIndex : 0) + 1;
 };
 
+const getFirstThemeInOtherMode = (currentTheme: string) => {
+  const currentThemeData = themes.find(x => x.theme === currentTheme) ?? themes[0];
+  return themes.find(x => x.dark !== currentThemeData.dark)?.theme ?? "light";
+};
+
 const App = () => {
 
   //
@@ -226,9 +226,10 @@ const App = () => {
 
   const [title, setTitle] = useState(APP_TITLE);
   const [theme, setTheme] = useState("light");
-  const nextTheme = getNextThemeInCurrentMode(theme);
-  const nextThemeNumber = getThemeNumberInMode(nextTheme);
-  const isNextThemeDark = isDarkTheme(nextTheme);
+  const nextThemeInMode = getNextThemeWithinMode(theme);
+  const topOtherModeTheme = getFirstThemeInOtherMode(theme);
+  const nextThemeNumber = getThemeNumberInMode(nextThemeInMode);
+  const isNextThemeDark = isDarkTheme(nextThemeInMode);
   const nextThemePrefix = isNextThemeDark ? "D" : "L";
 
   useEffect(
@@ -261,6 +262,15 @@ const App = () => {
     ]
   );
 
+  const setAndPersistTheme = async (targetTheme: string) => {
+    const savedTheme = await localforage.setItem(
+      "theme",
+      targetTheme,
+    );
+
+    setTheme(savedTheme);
+  };
+
   //
   // Return JSX...
   //
@@ -285,15 +295,10 @@ const App = () => {
           {/* this hidden checkbox controls the state */}
           <input 
             type="checkbox"
-            checked={!isNextThemeDark}
+            checked={!isDarkTheme(topOtherModeTheme)}
             onChange={async () => {
-              const savedTheme = await localforage.setItem(
-                "theme",
-                nextTheme,
-              );
-
-              setTheme(
-                savedTheme
+              await setAndPersistTheme(
+                topOtherModeTheme,
               );
             }}             
           />
@@ -315,12 +320,19 @@ const App = () => {
             <path
               d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
-          <span
-            className="pointer-events-none absolute -bottom-2 -right-2 text-[10px] font-semibold leading-none opacity-80"
-            aria-label={`Next theme ${nextThemePrefix}${nextThemeNumber}`}
+          <button
+            type="button"
+            className="absolute -bottom-2 -right-2 text-[10px] font-semibold leading-none opacity-80"
+            aria-label={`Next in mode ${nextThemePrefix}${nextThemeNumber}`}
+            onClick={async (event) => {
+              // Keep badge click separate from the label/checkbox toggle behavior.
+              event.preventDefault();
+              event.stopPropagation();
+              await setAndPersistTheme(nextThemeInMode);
+            }}
           >
             {nextThemePrefix}{nextThemeNumber}
-          </span>
+          </button>
         </label>
       </div>
       <div
