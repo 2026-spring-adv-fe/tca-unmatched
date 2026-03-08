@@ -47,6 +47,7 @@ const App = () => {
   // const [gameResults, setGameResults] = useState<GameResult[]>([]);
 
   const [title, setTitle] = useState(APP_TITLE);
+  const [darkMode, setDarkMode] = useState("light");
 
   //
   // Calculated state and other funcs...
@@ -62,7 +63,10 @@ const App = () => {
   // Return JSX...
   //
   return (
-    <div>
+    <div
+      className='min-h-screen'
+      data-theme={darkMode}
+    >
       <div
         className="navbar bg-neutral text-neutral-content flex"
       >
@@ -73,9 +77,18 @@ const App = () => {
             title
           }
         </p>
-        <label className="swap swap-rotate ml-auto">
+        <label 
+          className="swap swap-rotate ml-auto"
+        >
           {/* this hidden checkbox controls the state */}
-          <input type="checkbox" />
+          <input 
+            type="checkbox"
+            onClick={() => setDarkMode(
+              darkMode === "light"
+                ? "dark"
+                : "light"
+            )}             
+          />
 
           {/* sun icon */}
           <svg
