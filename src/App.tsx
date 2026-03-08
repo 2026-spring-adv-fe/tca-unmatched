@@ -1,41 +1,41 @@
 import './App.css'
-import { 
+import {
   HashRouter,
   Routes,
-  Route, 
+  Route,
 } from 'react-router';
 import { Home } from './Home';
 import { Setup } from './Setup';
 import { Play } from './Play';
-import { 
-  getGeneralFacts, 
-  getLeaderboard, 
-  type GameResult, 
+import {
+  getGeneralFacts,
+  getLeaderboard,
+  type GameResult,
 } from './GameResults';
 import { useState } from 'react';
 
 
 const dummyGameResults: GameResult[] = [
-    {
-        winner: "Harry",
-        players: [
-            "Harry",
-            "Hermione",
-            "Ron",
-        ],
-        start: "2026-02-01T18:53:59.078Z",
-        end: "2026-02-01T19:27:59.078Z",
-    },
-    {
-        winner: "Hermione",
-        players: [
-            "Harry",
-            "Hermione",
-            "Ron",
-        ],
-        start: "2026-01-15T22:07:59.078Z",
-        end: "2026-01-15T23:01:59.078Z",
-    },  
+  {
+    winner: "Harry",
+    players: [
+      "Harry",
+      "Hermione",
+      "Ron",
+    ],
+    start: "2026-02-01T18:53:59.078Z",
+    end: "2026-02-01T19:27:59.078Z",
+  },
+  {
+    winner: "Hermione",
+    players: [
+      "Harry",
+      "Hermione",
+      "Ron",
+    ],
+    start: "2026-01-15T22:07:59.078Z",
+    end: "2026-01-15T23:01:59.078Z",
+  },
 ];
 
 const App = () => {
@@ -61,37 +61,46 @@ const App = () => {
   //
   return (
     <div>
+      <div 
+        className="navbar bg-neutral text-neutral-content"
+      >
+        <p 
+          className="text-xl font-bold"
+        >
+          UM Companion
+        </p>
+      </div>
       <HashRouter>
         <Routes>
-          <Route 
+          <Route
             path='/'
             element={
               <Home
                 generalFacts={
                   getGeneralFacts(gameResults)
-                } 
+                }
                 leaderboard={
                   getLeaderboard(gameResults)
                 }
               />
             }
           />
-          <Route 
+          <Route
             path='/setup'
             element={
               <Setup />
             }
           />
-          <Route 
+          <Route
             path='/play'
             element={
-              <Play 
+              <Play
                 addNewGameResult={
                   addNewGameResult
                 }
               />
             }
-          />          
+          />
         </Routes>
       </HashRouter>
     </div>
