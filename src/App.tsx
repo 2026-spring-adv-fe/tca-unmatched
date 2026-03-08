@@ -203,6 +203,19 @@ const isDarkTheme = (themeName: string) => {
   return themes.find(x => x.theme === themeName)?.dark ?? false;
 };
 
+const getThemeNumberInMode = (themeName: string) => {
+  const themeData = themes.find(x => x.theme === themeName);
+
+  if (!themeData) {
+    return 1;
+  }
+
+  const modeThemes = themes.filter(x => x.dark === themeData.dark);
+  const modeIndex = modeThemes.findIndex(x => x.theme === themeName);
+
+  return (modeIndex >= 0 ? modeIndex : 0) + 1;
+};
+
 const App = () => {
 
   //
@@ -214,8 +227,7 @@ const App = () => {
   const [title, setTitle] = useState(APP_TITLE);
   const [theme, setTheme] = useState("light");
   const nextTheme = getNextThemeInCurrentMode(theme);
-  const nextThemeIndex = themes.findIndex(x => x.theme === nextTheme);
-  const nextThemeNumber = (nextThemeIndex >= 0 ? nextThemeIndex : 0) + 1;
+  const nextThemeNumber = getThemeNumberInMode(nextTheme);
   const isNextThemeDark = isDarkTheme(nextTheme);
   const nextThemePrefix = isNextThemeDark ? "D" : "L";
 
