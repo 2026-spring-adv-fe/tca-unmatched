@@ -322,7 +322,7 @@ const App = () => {
           </svg>
           <button
             type="button"
-            className="absolute -bottom-2 -right-2 text-[10px] font-semibold leading-none opacity-80"
+            className="absolute -bottom-2 -right-2 cursor-pointer rounded border border-current/30 bg-neutral px-1 py-[2px] text-[10px] font-semibold leading-none opacity-90 shadow-sm transition hover:scale-105 hover:opacity-100 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-current"
             aria-label={`Next in mode ${nextThemePrefix}${nextThemeNumber}`}
             onClick={async (event) => {
               // Keep badge click separate from the label/checkbox toggle behavior.
