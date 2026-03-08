@@ -39,6 +39,170 @@ const dummyGameResults: GameResult[] = [
   },
 ];
 
+const themes = [
+    {
+        theme: "light",
+        dark: false,
+    },
+    {
+        theme: "cupcake",
+        dark: false,
+    },
+    {
+        theme: "bumblebee",
+        dark: false,
+    },
+    {
+        theme: "emerald",
+        dark: false,
+    },
+    {
+        theme: "corporate",
+        dark: false,
+    },
+    {
+        theme: "retro",
+        dark: false,
+    },
+    {
+        theme: "cyberpunk",
+        dark: false,
+    },
+    {
+        theme: "valentine",
+        dark: false,
+    },
+    {
+        theme: "garden",
+        dark: false,
+    },
+    {
+        theme: "lofi",
+        dark: false,
+    },
+    {
+        theme: "pastel",
+        dark: false,
+    },
+    {
+        theme: "fantasy",
+        dark: false,
+    },
+    {
+        theme: "wireframe",
+        dark: false,
+    },
+    {
+        theme: "cmyk",
+        dark: false,
+    },
+    {
+        theme: "autumn",
+        dark: false,
+    },
+    {
+        theme: "acid",
+        dark: false,
+    },
+    {
+        theme: "lemonade",
+        dark: false,
+    },
+    {
+        theme: "winter",
+        dark: false,
+    },
+    {
+        theme: "nord",
+        dark: false,
+    },
+    {
+        theme: "caramellatte",
+        dark: false,
+    },
+    {
+        theme: "silk",
+        dark: false,
+    },
+    {
+        theme: "dark",
+        dark: true,
+    },
+    {
+        theme: "synthwave",
+        dark: true,
+    },
+    {
+        theme: "halloween",
+        dark: true,
+    },
+    {
+        theme: "forest",
+        dark: true,
+    },
+    {
+        theme: "aqua",
+        dark: true,
+    },
+    {
+        theme: "black",
+        dark: true,
+    },
+    {
+        theme: "luxury",
+        dark: true,
+    },
+    {
+        theme: "dracula",
+        dark: true,
+    },
+    {
+        theme: "business",
+        dark: true,
+    },
+    {
+        theme: "night",
+        dark: true,
+    },
+    {
+        theme: "coffee",
+        dark: true,
+    },
+    {
+        theme: "dim",
+        dark: true,
+    },
+    {
+        theme: "sunset",
+        dark: true,
+    },
+    {
+        theme: "abyss",
+        dark: true,
+    },
+];
+
+const getNextThemeInCurrentMode = (currentTheme: string) => {
+  const currentThemeData = themes.find(x => x.theme === currentTheme) ?? themes[0];
+  const sameModeThemes = themes.filter(x => x.dark === currentThemeData.dark);
+  const oppositeModeThemes = themes.filter(x => x.dark !== currentThemeData.dark);
+  const currentModeIndex = sameModeThemes.findIndex(x => x.theme === currentThemeData.theme);
+
+  if (currentModeIndex < 0) {
+    return sameModeThemes[0]?.theme ?? "light";
+  }
+
+  if (currentModeIndex === sameModeThemes.length - 1) {
+    return oppositeModeThemes[0]?.theme ?? "light";
+  }
+
+  return sameModeThemes[currentModeIndex + 1]?.theme ?? "light";
+};
+
+const isDarkTheme = (themeName: string) => {
+  return themes.find(x => x.theme === themeName)?.dark ?? false;
+};
+
 const App = () => {
 
   //
@@ -49,6 +213,11 @@ const App = () => {
 
   const [title, setTitle] = useState(APP_TITLE);
   const [theme, setTheme] = useState("light");
+  const nextTheme = getNextThemeInCurrentMode(theme);
+  const nextThemeIndex = themes.findIndex(x => x.theme === nextTheme);
+  const nextThemeNumber = (nextThemeIndex >= 0 ? nextThemeIndex : 0) + 1;
+  const isNextThemeDark = isDarkTheme(nextTheme);
+  const nextThemePrefix = isNextThemeDark ? "D" : "L";
 
   useEffect(
     () => {
@@ -99,18 +268,16 @@ const App = () => {
           }
         </p>
         <label 
-          className="swap swap-rotate ml-auto"
+          className="swap swap-rotate ml-auto relative mr-3"
         >
           {/* this hidden checkbox controls the state */}
           <input 
             type="checkbox"
-            onClick={async () => {
-
+            checked={!isNextThemeDark}
+            onChange={async () => {
               const savedTheme = await localforage.setItem(
                 "theme",
-                theme === "light"
-                  ? "dark"
-                  : "light",
+                nextTheme,
               );
 
               setTheme(
@@ -136,6 +303,12 @@ const App = () => {
             <path
               d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
+          <span
+            className="pointer-events-none absolute -bottom-2 -right-2 text-[10px] font-semibold leading-none opacity-80"
+            aria-label={`Next theme ${nextThemePrefix}${nextThemeNumber}`}
+          >
+            {nextThemePrefix}{nextThemeNumber}
+          </span>
         </label>
       </div>
       <div
