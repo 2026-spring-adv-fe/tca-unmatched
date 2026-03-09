@@ -89,7 +89,7 @@ const App = () => {
       data-theme={theme}
     >
       <div
-        className="navbar bg-neutral text-neutral-content flex"
+        className="navbar overflow-x-hidden bg-neutral text-neutral-content flex"
       >
         <p
           className="text-xl font-bold"

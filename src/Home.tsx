@@ -38,7 +38,7 @@ export const Home: React.FC<HomeProps> = ({
                 Play Unmatched
             </button>
 
-            <div className="card bg-base-100 w-full shadow-lg my-5">
+            <div className="card overflow-x-scroll bg-base-100 w-full shadow-lg my-5">
                 <div className="card-body p-2">
                     <h2 className="card-title">General Facts</h2>
                     <table className="table table-zebra">
@@ -63,7 +63,7 @@ export const Home: React.FC<HomeProps> = ({
                     </table>
                 </div>
             </div>          
-            <div className="card bg-base-100 w-full shadow-lg my-5">
+            <div className="card overflow-x-scroll bg-base-100 w-full shadow-lg my-5">
                 <div className="card-body p-2">
                     <h2 className="card-title">Player Leaderboard</h2>
                     {
