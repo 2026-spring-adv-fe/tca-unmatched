@@ -64,10 +64,10 @@ const App = () => {
   return (
     <div>
       <div 
-        className="navbar bg-neutral text-neutral-content"
+        className="navbar bg-neutral text-neutral-content overflow-x-hidden"
       >
         <p
-          className='text-xl font-bold'
+          className='text-xl font-bold text-nowrap'
         >
           {
             title
