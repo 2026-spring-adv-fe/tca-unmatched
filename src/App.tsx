@@ -61,6 +61,15 @@ const App = () => {
   //
   return (
     <div>
+      <div 
+        className="navbar bg-neutral text-neutral-content"
+      >
+        <p
+          className='text-xl font-bold'
+        >
+          UM Companion
+        </p>
+      </div>
       <HashRouter>
         <Routes>
           <Route 
