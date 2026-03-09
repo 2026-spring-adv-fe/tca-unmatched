@@ -6,14 +6,18 @@ export const APP_TITLE = "UM Companion";
 type HomeProps = {
     generalFacts: GeneralFacts,
     leaderboard: LeaderboardEntry[],
+    setTitle: (t: string) => void,
 };
 
 
 export const Home: React.FC<HomeProps> = ({
     generalFacts,
     leaderboard,
+    setTitle,
 }) => {
     
+    setTitle(APP_TITLE);
+
     // We'll write code here...
     const nav = useNavigate();
 
