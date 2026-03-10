@@ -1,4 +1,179 @@
 @import "tailwindcss";
-@plugin "daisyui"{
-    themes: light --default, dark --prefersdark, cupcake;
-};
+
+@plugin "daisyui" {
+    themes: false;
+}
+
+@plugin "daisyui/theme" {
+    name: "companion-day";
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
+    --color-base-100: #fffaf2;
+    --color-base-200: #f5ecdf;
+    --color-base-300: #eadbc6;
+    --color-base-content: #233041;
+    --color-primary: #f46c48;
+    --color-primary-content: #fff8f2;
+    --color-secondary: #137d7d;
+    --color-secondary-content: #ecfffe;
+    --color-accent: #f2c14e;
+    --color-accent-content: #2d2106;
+    --color-neutral: #213043;
+    --color-neutral-content: #f7f5f0;
+    --color-info: #4d9de0;
+    --color-info-content: #f5fbff;
+    --color-success: #3fa66b;
+    --color-success-content: #effff4;
+    --color-warning: #d9872b;
+    --color-warning-content: #fff8ee;
+    --color-error: #d45d66;
+    --color-error-content: #fff5f6;
+    --radius-selector: 1.25rem;
+    --radius-field: 1rem;
+    --radius-box: 1.75rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+    name: "companion-night";
+    default: false;
+    prefersdark: true;
+    color-scheme: dark;
+    --color-base-100: #111827;
+    --color-base-200: #182235;
+    --color-base-300: #24324b;
+    --color-base-content: #f5efe7;
+    --color-primary: #ff8b5e;
+    --color-primary-content: #251107;
+    --color-secondary: #62d9d1;
+    --color-secondary-content: #031617;
+    --color-accent: #ffd166;
+    --color-accent-content: #2d2106;
+    --color-neutral: #09111d;
+    --color-neutral-content: #eef3f8;
+    --color-info: #66b3ff;
+    --color-info-content: #05111d;
+    --color-success: #5ed49a;
+    --color-success-content: #07160f;
+    --color-warning: #f0a84b;
+    --color-warning-content: #241506;
+    --color-error: #ff7d87;
+    --color-error-content: #24070b;
+    --radius-selector: 1.25rem;
+    --radius-field: 1rem;
+    --radius-box: 1.75rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+}
+
+:root {
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top, color-mix(in srgb, var(--color-secondary) 18%, transparent), transparent 38%),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-base-200) 92%, white 8%), var(--color-base-100));
+    color: var(--color-base-content);
+}
+
+.app-shell {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.app-shell::before,
+.app-shell::after {
+    content: "";
+    position: absolute;
+    inset: auto;
+    border-radius: 9999px;
+    filter: blur(18px);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.app-shell::before {
+    top: -10rem;
+    right: -6rem;
+    width: 22rem;
+    height: 22rem;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 34%, transparent), transparent 68%);
+}
+
+.app-shell::after {
+    bottom: -12rem;
+    left: -8rem;
+    width: 24rem;
+    height: 24rem;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-secondary) 24%, transparent), transparent 66%);
+}
+
+.app-nav {
+    background: color-mix(in srgb, var(--color-neutral) 82%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-base-content) 12%, transparent);
+    backdrop-filter: blur(20px);
+}
+
+.app-nav-title {
+    color: var(--color-neutral-content);
+}
+
+[data-theme="companion-day"] .app-nav {
+    background:
+        linear-gradient(180deg, color-mix(in srgb, #fff7eb 90%, transparent), color-mix(in srgb, var(--color-base-200) 94%, white 6%));
+    border-bottom-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
+    box-shadow: 0 18px 42px -34px color-mix(in srgb, var(--color-neutral) 42%, transparent);
+}
+
+[data-theme="companion-day"] .app-nav-title {
+    color: color-mix(in srgb, var(--color-neutral) 92%, black 8%);
+}
+
+[data-theme="companion-day"] .app-nav .btn {
+    background: color-mix(in srgb, white 74%, var(--color-base-100));
+    border-color: color-mix(in srgb, var(--color-primary) 14%, transparent);
+}
+
+[data-theme="companion-night"] .app-nav {
+    background:
+        linear-gradient(180deg, color-mix(in srgb, #060b14 92%, transparent), color-mix(in srgb, var(--color-neutral) 94%, transparent));
+    border-bottom-color: color-mix(in srgb, var(--color-secondary) 18%, transparent);
+    box-shadow: 0 18px 40px -30px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="companion-night"] .app-nav .btn {
+    background: color-mix(in srgb, var(--color-base-100) 22%, black);
+    border-color: color-mix(in srgb, var(--color-secondary) 16%, transparent);
+}
+
+.app-panel {
+    background: color-mix(in srgb, var(--color-base-100) 76%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-base-content) 10%, transparent);
+    box-shadow: 0 24px 70px -40px color-mix(in srgb, var(--color-neutral) 58%, transparent);
+    backdrop-filter: blur(18px);
+}
+
+.app-kicker {
+    color: color-mix(in srgb, var(--color-base-content) 72%, transparent);
+}
+
+.app-glow {
+    box-shadow: 0 18px 45px -24px color-mix(in srgb, var(--color-primary) 60%, transparent);
+}
