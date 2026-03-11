@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 type SetupProps = {
@@ -8,7 +9,10 @@ export const Setup: React.FC<SetupProps> = ({
     setTitle,
 }) => {
 
-    setTitle("Setup");
+    useEffect(
+        () => setTitle("Setup"),
+        [],
+    );
 
     // We'll write code here...
     const nav = useNavigate();
