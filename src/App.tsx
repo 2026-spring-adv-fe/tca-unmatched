@@ -106,6 +106,9 @@ const App = () => {
           {/* this hidden checkbox controls the state */}
           <input 
             type="checkbox" 
+            checked={
+              "light" !== theme
+            }
             onClick={
               async () => {
                 const result = await localforage.setItem<string>(
