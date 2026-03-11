@@ -12,7 +12,7 @@ import {
   getLeaderboard, 
   type GameResult, 
 } from './GameResults';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import localforage from 'localforage';
 
 
@@ -50,6 +50,27 @@ const App = () => {
   const [title, setTitle] = useState(APP_TITLE);
 
   const [theme, setTheme] = useState("light");
+
+  useEffect(
+    () => {
+      const loadTheme = async () => {
+
+        const result = await localforage.getItem<string>("theme") ?? "light";
+
+        if (!ignore) {
+          setTheme(result);
+        }
+      }
+
+      let ignore = false;
+      loadTheme();
+
+      return () => {
+        ignore = true;
+      }
+    }, 
+    [],
+  );  
 
   //
   // Calculated state and other funcs...
