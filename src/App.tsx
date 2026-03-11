@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from 'react';
 import localforage from 'localforage';
 
+const DEFAULT_THEME = "light";
 
 const dummyGameResults: GameResult[] = [
     {
@@ -49,13 +50,13 @@ const App = () => {
 
   const [title, setTitle] = useState(APP_TITLE);
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(DEFAULT_THEME);
 
   useEffect(
     () => {
       const loadTheme = async () => {
 
-        const result = await localforage.getItem<string>("theme") ?? "light";
+        const result = await localforage.getItem<string>("theme") ?? DEFAULT_THEME;
 
         if (!ignore) {
           setTheme(result);
@@ -107,15 +108,15 @@ const App = () => {
           <input 
             type="checkbox" 
             checked={
-              "light" !== theme
+              DEFAULT_THEME !== theme
             }
             onClick={
               async () => {
                 const result = await localforage.setItem<string>(
                   'theme',
-                  theme === "light"
+                  theme === DEFAULT_THEME
                     ? "dark"
-                    : "light",
+                    : DEFAULT_THEME,
                 );
 
                 setTheme(
