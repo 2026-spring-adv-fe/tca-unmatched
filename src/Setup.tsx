@@ -8,7 +8,7 @@ export const Setup: React.FC<SetupProps> = ({
     setTitle,
 }) => {
 
-    setTitle("Setup");
+    setTitle("Choose players & fighters");
 
     // We'll write code here...
     const nav = useNavigate();

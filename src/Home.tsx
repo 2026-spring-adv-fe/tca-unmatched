@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import type { GeneralFacts, LeaderboardEntry } from "./GameResults";
 
-export const APP_TITLE = "UM Companion";
+export const APP_TITLE = "Home & Fun Facts";
 
 type HomeProps = {
     generalFacts: GeneralFacts,
@@ -28,13 +28,13 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                     <div className="space-y-3">
                         <div className="badge badge-accent badge-outline badge-lg">
-                            Unmatched companion
+                            Companion App
                         </div>
                         <h1 className="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">
-                            Keep match nights tidy without losing the drama.
+                            Player & Fighter Win Tracker
                         </h1>
                         <p className="app-kicker max-w-2xl text-base sm:text-lg">
-                            A brighter board for daytime play, a richer glow after dark, and the same DaisyUI core underneath both.
+                            A quick, tap‑happy way to log who beat who. Build your own UM history, settle old grudges, and relive the glory when you’re bored and thumbing your phone.
                         </p>
                     </div>
 
