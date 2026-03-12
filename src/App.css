@@ -1,4 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap");
 @import "tailwindcss";
 @plugin "daisyui"{
-    themes: light --default, dark --prefersdark, cupcake;
+    themes: light --default, dark --prefersdark;
 };
+
+[data-theme] {
+    --font-body: "Manrope", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-heading: "Sora", "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    font-family: var(--font-body);
+    background-attachment: fixed;
+    transition: background-color 200ms ease, color 200ms ease;
+}
+
+[data-theme] :where(h1, h2, h3, h4, h5, h6, .card-title, .navbar p) {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+}
+
+[data-theme] .navbar {
+    box-shadow: 0 14px 34px -22px color-mix(in srgb, var(--color-neutral) 70%, transparent);
+}
+
+[data-theme] .card {
+    box-shadow: 0 20px 44px -28px color-mix(in srgb, var(--color-neutral) 60%, transparent);
+}
+
+[data-theme] .btn.btn-primary {
+    box-shadow: 0 12px 26px -14px color-mix(in srgb, var(--color-primary) 55%, transparent);
+}
+
+[data-theme="light"] {
+    --color-base-100: #f6efe5;
+    --color-base-200: #ede1d1;
+    --color-base-300: #decdb7;
+    --color-base-content: #2a1f1a;
+    --color-primary: #7b2f45;
+    --color-primary-content: #fff3f6;
+    --color-secondary: #3d5f7a;
+    --color-secondary-content: #eef5fb;
+    --color-accent: #b08b4f;
+    --color-accent-content: #211708;
+    --color-neutral: #26201d;
+    --color-neutral-content: #f5ece0;
+    background-image: linear-gradient(155deg, #fbf6ef 0%, #f2e9dc 42%, #e7d7c2 100%);
+}
+
+[data-theme="dark"] {
+    --color-base-100: #10131b;
+    --color-base-200: #171d28;
+    --color-base-300: #222b3a;
+    --color-base-content: #ebe3d4;
+    --color-primary: #d3b06f;
+    --color-primary-content: #221506;
+    --color-secondary: #7b3950;
+    --color-secondary-content: #f8ecf0;
+    --color-accent: #5f8295;
+    --color-accent-content: #0d171d;
+    --color-neutral: #0a0e14;
+    --color-neutral-content: #efe7db;
+    background-image: linear-gradient(155deg, #090c13 0%, #141b27 44%, #2a2231 100%);
+}
+
+[data-theme="light"] .navbar {
+    background-image: linear-gradient(90deg, #472535 0%, #3e4c64 100%);
+}
+
+[data-theme="dark"] .navbar {
+    background-image: linear-gradient(90deg, #0a0e14 0%, #232132 100%);
+}
