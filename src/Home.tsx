@@ -120,9 +120,9 @@ export const Home: React.FC<HomeProps> = ({
                                                         <td>
                                                             { x.avg }
                                                         </td>
-                                                        <td>
+                                                        <th>
                                                             { x.name }
-                                                        </td>
+                                                        </th>
                                                     </tr>
                                                 )
                                             )
