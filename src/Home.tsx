@@ -39,7 +39,7 @@ export const Home: React.FC<HomeProps> = ({
                                 Player & Fighter Win Tracker
                             </h1>
                             <p className="opacity-80 max-w-2xl">
-                                Log each match in seconds and keep the bragging-rights ledger up to date.
+                                Log your un-matches and enjoy some fun-facts forever.
                             </p>
                         </div>
 
