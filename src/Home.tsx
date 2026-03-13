@@ -58,7 +58,7 @@ export const Home: React.FC<HomeProps> = ({
             <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
                 <div className="card-body p-2">
                     <h2 
-                        className="card-title text-nowrap"
+                        className="card-title text-nowrap ml-3"
                     >
                         General Facts
                     </h2>
@@ -87,7 +87,7 @@ export const Home: React.FC<HomeProps> = ({
             <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
                 <div className="card-body p-2">
                     <h2 
-                        className="card-title text-nowrap"
+                        className="card-title text-nowrap ml-3"
                     >
                         Player Leaderboard
                     </h2>
