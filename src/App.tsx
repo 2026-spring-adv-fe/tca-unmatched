@@ -10,6 +10,7 @@ import { Play } from './Play';
 import { 
   getGeneralFacts, 
   getLeaderboard, 
+  getPreviousPlayers, 
   type GameResult, 
 } from './GameResults';
 import { useEffect, useState } from 'react';
@@ -169,6 +170,9 @@ const App = () => {
               element={
                 <Setup 
                   setTitle={setTitle}
+                  previousPlayers={
+                    getPreviousPlayers(gameResults)
+                  }
                 />
               }
             />
