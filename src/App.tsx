@@ -111,7 +111,7 @@ const App = () => {
             checked={
               DEFAULT_THEME !== theme
             }
-            onClick={
+            onChange={
               async () => {
                 const result = await localforage.setItem<string>(
                   'theme',
