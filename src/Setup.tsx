@@ -53,6 +53,19 @@ export const Setup: React.FC<SetupProps> = ({
             >
                 Start the Game
             </button>
+            <div 
+                className="join mt-4 w-full"
+            >
+                <input 
+                    className="input join-item" 
+                    placeholder="New Player Name" 
+                />
+                <button 
+                    className="btn join-item rounded-r-full"
+                >
+                    Add
+                </button>
+            </div>
             <div className="mt-4">
                 {
                     availablePlayers.map(
