@@ -58,6 +58,7 @@ export const Setup: React.FC<SetupProps> = ({
                     availablePlayers.map(
                         x => (
                             <label
+                                key={x.name}
                                 className="block mt-2"
                             >
                                 <input 
