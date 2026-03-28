@@ -119,6 +119,26 @@ export const getPreviousPlayers = (
     )
 ;
 
+export const getFighterLeaderboard = (
+    games: GameResult[]
+): LeaderboardEntry[] => getPreviousFighters(games)
+    .map(
+        x => ({
+            ...getFighterLeaderboardEntry(
+                games,
+                x,
+            )
+        })
+    )
+    .sort(
+        (a, b) => a.avg == b.avg
+            ? a.wins == 0 && b.wins == 0
+                ? (a.wins + a.losses) - (b.wins + b.losses)
+                : (b.wins + b.losses) - (a.wins + a.losses)
+            : Number.parseFloat(b.avg) - Number.parseFloat(a.avg)
+    )
+;
+
 export const getPreviousFighters = (
     games: GameResult[]
 ) => games 
@@ -140,6 +160,37 @@ export const getPreviousFighters = (
 
 //
 // Helper funcs...
+//
+const getFighterLeaderboardEntry = (
+    games: GameResult[],
+    fighter: string,
+): LeaderboardEntry => {
+
+    const countOfWins = games.filter(
+        x => x.players.some(
+            y => y.fighter == fighter && y.name == x.winner
+        )
+    ).length;
+
+    const totalGames = games.filter(
+        x => x.players.some(
+            y => y.fighter == fighter
+        )
+    ).length;
+
+    const avg = totalGames > 0
+        ? countOfWins / totalGames
+        : 0
+    ;
+
+    return {
+        wins: countOfWins,
+        losses: totalGames - countOfWins,
+        avg: `${avg.toFixed(3)}`,
+        name: fighter,
+    };
+};
+
 //
 const formatGameDuration = durationFormatter<string>();
 

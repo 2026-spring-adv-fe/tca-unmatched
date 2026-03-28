@@ -9,6 +9,7 @@ import { Setup } from './Setup';
 import { Play } from './Play';
 import { 
   getGeneralFacts, 
+  getFighterLeaderboard,
   getLeaderboard, 
   getPreviousFighters,
   getPreviousPlayers, 
@@ -176,6 +177,9 @@ const App = () => {
                   } 
                   leaderboard={
                     getLeaderboard(gameResults)
+                  }
+                  fighterLeaderboard={
+                    getFighterLeaderboard(gameResults)
                   }
                 />
               }

@@ -7,6 +7,7 @@ export const APP_TITLE = "My UM Life";
 type HomeProps = {
     generalFacts: GeneralFacts,
     leaderboard: LeaderboardEntry[],
+    fighterLeaderboard: LeaderboardEntry[],
     setTitle: (t: string) => void,
 };
 
@@ -14,6 +15,7 @@ type HomeProps = {
 export const Home: React.FC<HomeProps> = ({
     generalFacts,
     leaderboard,
+    fighterLeaderboard,
     setTitle,
 }) => {
     
@@ -107,6 +109,55 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             leaderboard.map(
+                                                x => (
+                                                    <tr
+                                                        key={x.name}
+                                                    >
+                                                        <td>
+                                                            { x.wins }
+                                                        </td>
+                                                        <td>
+                                                            { x.losses }
+                                                        </td>
+                                                        <td>
+                                                            { x.avg }
+                                                        </td>
+                                                        <th>
+                                                            { x.name }
+                                                        </th>
+                                                    </tr>
+                                                )
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                    }
+                </div>
+            </div>       
+            <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
+                <div className="card-body p-2">
+                    <h2 
+                        className="card-title text-nowrap ml-3"
+                    >
+                        Fighter Leaderboard
+                    </h2>
+                    {
+                        fighterLeaderboard.length === 0
+                            ? <p>N/A</p>
+                            : (
+                                <table className="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>W</th>
+                                            <th>L</th>
+                                            <th>AVG</th>
+                                            <th>FIGHTER</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            fighterLeaderboard.map(
                                                 x => (
                                                     <tr
                                                         key={x.name}
