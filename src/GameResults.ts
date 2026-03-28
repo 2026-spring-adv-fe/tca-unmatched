@@ -3,9 +3,14 @@ import { durationFormatter } from 'human-readable';
 //
 // Exported type definitions...
 //
+export type Player = {
+    name: string,
+    fighter: string,
+};
+
 export type GameResult = {
     winner: string;
-    players: string[];
+    players: Player[];
 
     start: string;
     end: string;
@@ -101,6 +106,9 @@ export const getPreviousPlayers = (
     .flatMap(
         x => x.players
     )
+    .map(
+        x => x.name
+    )
     .filter(
         (x, i, a) => i == a.findIndex(
             y => y == x
@@ -137,7 +145,7 @@ const getLeaderboardEntry = (
 
     const totalGames = games.filter(
         x => x.players.some(
-            y => y == player
+            y => y.name == player
         )
     ).length;
 

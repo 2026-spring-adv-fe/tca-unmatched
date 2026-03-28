@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import type { Player } from "./GameResults";
 
 type SetupProps = {
     setTitle: (t: string) => void;
     previousPlayers: string[];
-    setCurrentPlayers: (players: string[]) => void;
+    setCurrentPlayers: (players: Player[]) => void;
 };
 
 export const Setup: React.FC<SetupProps> = ({
@@ -68,7 +69,10 @@ export const Setup: React.FC<SetupProps> = ({
                                     x => x.checked
                                 )
                                 .map(
-                                    x => x.name
+                                    x => ({
+                                        name: x.name,
+                                        fighter: "Foo",
+                                    })
                                 )
                         );
                         nav('/play');

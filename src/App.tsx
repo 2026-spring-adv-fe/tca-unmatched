@@ -11,7 +11,8 @@ import {
   getGeneralFacts, 
   getLeaderboard, 
   getPreviousPlayers, 
-  type GameResult, 
+  type GameResult,
+  type Player, 
 } from './GameResults';
 import { useEffect, useState } from 'react';
 import localforage from 'localforage';
@@ -22,9 +23,14 @@ const dummyGameResults: GameResult[] = [
     {
         winner: "Harry",
         players: [
-            "Harry",
-            "Hermione",
-            "Ron",
+            {
+              name: "Harry",
+              fighter: "T-Rex",
+            },
+            {
+              name: "Hermione",
+              fighter: "Ali",
+            },
         ],
         start: "2026-02-01T18:53:59.078Z",
         end: "2026-02-01T19:27:59.078Z",
@@ -32,9 +38,14 @@ const dummyGameResults: GameResult[] = [
     {
         winner: "Hermione",
         players: [
-            "Harry",
-            "Hermione",
-            "Ron",
+            {
+              name: "Harry",
+              fighter: "Ali",
+            },
+            {
+              name: "Hermione",
+              fighter: "T-Rex",
+            },
         ],
         start: "2026-01-15T22:07:59.078Z",
         end: "2026-01-15T23:01:59.078Z",
@@ -53,8 +64,8 @@ const App = () => {
 
   const [theme, setTheme] = useState(DEFAULT_THEME);
 
-  // const [currentPlayers, setCurrentPlayers] = useState<string[]>([]);
-  const currentPlayersStateTuple = useState<string[]>([]);
+  const [currentPlayers, setCurrentPlayers] = useState<Player[]>([]);
+  // const currentPlayersStateTuple = useState<Player[]>([]);
 
   useEffect(
     () => {
@@ -176,7 +187,7 @@ const App = () => {
                   previousPlayers={
                     getPreviousPlayers(gameResults)
                   }
-                  setCurrentPlayers={currentPlayersStateTuple[1]}
+                  setCurrentPlayers={setCurrentPlayers}
                 />
               }
             />
@@ -188,7 +199,7 @@ const App = () => {
                   addNewGameResult={
                     addNewGameResult
                   }
-                  players={currentPlayersStateTuple[0]}
+                  players={currentPlayers}
                 />
               }
             />          
