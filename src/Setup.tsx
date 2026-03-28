@@ -44,6 +44,7 @@ export const Setup: React.FC<SetupProps> = ({
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [choosingForPlayer, setChoosingForPlayer] = useState("");
+    const [newFighterName, setNewFighterName] = useState("");
 
     useEffect(
         () => setTitle("Setup"),
@@ -63,6 +64,10 @@ export const Setup: React.FC<SetupProps> = ({
     //
     const dupePlayerName = availablePlayers.some(
         x => x.name === newPlayerName
+    );
+
+    const dupeFighterName = availableFighters.some(
+        x => x.name === newFighterName
     );
 
     const twoPlayersChosen = availablePlayers.filter(
@@ -177,6 +182,14 @@ export const Setup: React.FC<SetupProps> = ({
                                                 () => {
                                                     if (!x.checked) {
                                                         setChoosingForPlayer(x.name);
+                                                        setAvailableFighters(
+                                                            availableFighters.map(
+                                                                f => ({
+                                                                    name: f.name,
+                                                                    checked: f.name === x.fighter,
+                                                                })
+                                                            )
+                                                        );
                                                         setDrawerOpen(true);
                                                     }
                                                     setAvailablePlayers(
@@ -196,8 +209,34 @@ export const Setup: React.FC<SetupProps> = ({
                                                 }
                                             }
                                         />
+                                        {`${x.name} `}
                                         {
-                                            `${x.name} (${x.fighter.length > 0 ? x.fighter : "None"})`
+                                            x.fighter.length > 0
+                                                ? (
+                                                    <>
+                                                    (<a
+                                                        className="link link-primary"
+                                                        onClick={
+                                                            (e) => {
+                                                                e.preventDefault();
+                                                                setChoosingForPlayer(x.name);
+                                                                setAvailableFighters(
+                                                                    availableFighters.map(
+                                                                        f => ({
+                                                                            name: f.name,
+                                                                            checked: f.name === x.fighter,
+                                                                        })
+                                                                    )
+                                                                );
+                                                                setDrawerOpen(true);
+                                                            }
+                                                        }
+                                                    >
+                                                        {x.fighter}
+                                                    </a>)
+                                                    </>
+                                                )
+                                                : "(None)"
                                         }
                                     </label>
                                 )
@@ -214,6 +253,41 @@ export const Setup: React.FC<SetupProps> = ({
                     <h2 className="text-lg font-bold mb-4">
                         Choose Fighter for {choosingForPlayer}
                     </h2>
+                    <div className="join w-full mb-4">
+                        <input 
+                            type="text"
+                            className={`input join-item ${dupeFighterName ? 'input-error' : ''}`}
+                            placeholder="New Fighter Name"
+                            value={newFighterName}
+                            onChange={
+                                (e) => setNewFighterName(e.target.value)
+                            }
+                        />
+                        <button 
+                            className="btn btn-primary join-item rounded-r-full"
+                            onClick={
+                                () => {
+                                    setAvailableFighters(
+                                        [
+                                            ...availableFighters,
+                                            {
+                                                name: newFighterName,
+                                                checked: false,
+                                            },
+                                        ].sort(
+                                            (a, b) => a.name.localeCompare(b.name)
+                                        )
+                                    );
+                                    setNewFighterName("");
+                                }
+                            }
+                            disabled={
+                                newFighterName.length === 0 || dupeFighterName
+                            }
+                        >
+                            Add
+                        </button>
+                    </div>
                     {
                         availableFighters.map(
                             x => (
@@ -222,10 +296,12 @@ export const Setup: React.FC<SetupProps> = ({
                                     className="block mt-2"
                                 >
                                     <input 
-                                        type="checkbox"
-                                        className="checkbox mr-2"
+                                        type="radio"
+                                        name="fighter-choice"
+                                        className="radio mr-2"
                                         checked={x.checked}
-                                        onChange={
+                                        onChange={() => {}}
+                                        onClick={
                                             () => {
                                                 setAvailablePlayers(
                                                     availablePlayers.map(
