@@ -189,12 +189,9 @@ export const getPlayerFighterMatrix = (games: GameResult[]): PlayerFighterMatrix
 
     const maxGames = Math.max(...cells.map(c => c.games), 1);
 
-    const totalForPlayer = (p: string) => cells.filter(c => c.player === p).reduce((s, c) => s + c.games, 0);
-    const totalForFighter = (f: string) => cells.filter(c => c.fighter === f).reduce((s, c) => s + c.games, 0);
-
     return {
-        players: [...allPlayers].sort((a, b) => totalForPlayer(b) - totalForPlayer(a)),
-        fighters: [...allFighters].sort((a, b) => totalForFighter(b) - totalForFighter(a)),
+        players: [...allPlayers].sort((a, b) => a.localeCompare(b)),
+        fighters: [...allFighters].sort((a, b) => a.localeCompare(b)),
         cells,
         maxGames,
     };

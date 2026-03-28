@@ -197,7 +197,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="card-body p-2">
                     <h2 className="card-title text-nowrap ml-3">
                         Player × Fighter
-                        <span className="badge badge-ghost badge-sm font-normal">by most played</span>
+                        <span className="badge badge-ghost badge-sm font-normal">alphabetical</span>
                     </h2>
                     {playerFighterMatrix.players.length === 0 ? (
                         <p className="ml-3">N/A</p>
