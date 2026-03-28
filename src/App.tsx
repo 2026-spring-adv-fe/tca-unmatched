@@ -10,6 +10,7 @@ import { Play } from './Play';
 import { 
   getGeneralFacts, 
   getLeaderboard, 
+  getPreviousFighters,
   getPreviousPlayers, 
   type GameResult,
   type Player, 
@@ -186,6 +187,9 @@ const App = () => {
                   setTitle={setTitle}
                   previousPlayers={
                     getPreviousPlayers(gameResults)
+                  }
+                  previousFighters={
+                    getPreviousFighters(gameResults)
                   }
                   setCurrentPlayers={setCurrentPlayers}
                 />

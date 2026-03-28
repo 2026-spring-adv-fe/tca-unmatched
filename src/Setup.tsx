@@ -5,12 +5,14 @@ import type { Player } from "./GameResults";
 type SetupProps = {
     setTitle: (t: string) => void;
     previousPlayers: string[];
+    previousFighters: string[];
     setCurrentPlayers: (players: Player[]) => void;
 };
 
 export const Setup: React.FC<SetupProps> = ({
     setTitle,
     previousPlayers,
+    previousFighters,
     setCurrentPlayers,
 }) => {
 
@@ -30,6 +32,18 @@ export const Setup: React.FC<SetupProps> = ({
             })
         )
     );
+
+    const [availableFighters, setAvailableFighters] = useState(
+        previousFighters.map(
+            x => ({
+                name: x,
+                checked: false,
+            })
+        )
+    );
+
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [choosingForPlayer, setChoosingForPlayer] = useState("");
 
     useEffect(
         () => setTitle("Setup"),
@@ -59,7 +73,16 @@ export const Setup: React.FC<SetupProps> = ({
     // Then return JSX...
     //
     return (
-        <>
+        <div className="drawer drawer-end">
+            <input 
+                id="fighter-drawer" 
+                type="checkbox" 
+                className="drawer-toggle" 
+                checked={drawerOpen}
+                onChange={() => setDrawerOpen(!drawerOpen)}
+            />
+            <div className="drawer-content">
+            <>
             <button 
                 className="btn btn-primary btn-lg w-full lg:w-64 mb-4"
                 onClick={
@@ -72,7 +95,7 @@ export const Setup: React.FC<SetupProps> = ({
                                 .map(
                                     x => ({
                                         name: x.name,
-                                        fighter: "Foo",
+                                        fighter: x.fighter,
                                     })
                                 )
                         );
@@ -151,18 +174,26 @@ export const Setup: React.FC<SetupProps> = ({
                                             className="checkbox mr-2"
                                             checked={x.checked} 
                                             onChange={
-                                                () => setAvailablePlayers(
-                                                    availablePlayers.map(
-                                                        y => ({
-                                                            name: y.name,
-                                                            fighter: y.fighter,
-                                                            checked: y.name === x.name
-                                                                ? !y.checked
-                                                                : y.checked
-                                                            ,
-                                                        })
-                                                    )
-                                                )
+                                                () => {
+                                                    if (!x.checked) {
+                                                        setChoosingForPlayer(x.name);
+                                                        setDrawerOpen(true);
+                                                    }
+                                                    setAvailablePlayers(
+                                                        availablePlayers.map(
+                                                            y => ({
+                                                                name: y.name,
+                                                                fighter: y.name === x.name && x.checked
+                                                                    ? ""
+                                                                    : y.fighter,
+                                                                checked: y.name === x.name
+                                                                    ? !y.checked
+                                                                    : y.checked
+                                                                ,
+                                                            })
+                                                        )
+                                                    );
+                                                }
                                             }
                                         />
                                         {
@@ -176,5 +207,56 @@ export const Setup: React.FC<SetupProps> = ({
                 </div>
             </div>
         </>
+            </div>
+            <div className="drawer-side">
+                <label htmlFor="fighter-drawer" className="drawer-overlay" onClick={() => setDrawerOpen(false)}></label>
+                <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                    <h2 className="text-lg font-bold mb-4">
+                        Choose Fighter for {choosingForPlayer}
+                    </h2>
+                    {
+                        availableFighters.map(
+                            x => (
+                                <label
+                                    key={x.name}
+                                    className="block mt-2"
+                                >
+                                    <input 
+                                        type="checkbox"
+                                        className="checkbox mr-2"
+                                        checked={x.checked}
+                                        onChange={
+                                            () => {
+                                                setAvailablePlayers(
+                                                    availablePlayers.map(
+                                                        y => ({
+                                                            ...y,
+                                                            fighter: y.name === choosingForPlayer
+                                                                ? x.name
+                                                                : y.fighter
+                                                            ,
+                                                        })
+                                                    )
+                                                );
+                                                setAvailableFighters(
+                                                    availableFighters.map(
+                                                        y => ({
+                                                            name: y.name,
+                                                            checked: y.name === x.name,
+                                                        })
+                                                    )
+                                                );
+                                                setDrawerOpen(false);
+                                            }
+                                        }
+                                    />
+                                    {x.name}
+                                </label>
+                            )
+                        )
+                    }
+                </div>
+            </div>
+        </div>
     );
 };
