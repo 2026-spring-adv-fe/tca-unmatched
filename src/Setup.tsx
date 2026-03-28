@@ -149,6 +149,17 @@ export const Setup: React.FC<SetupProps> = ({
                                         )
                                     );
 
+                                    setChoosingForPlayer(newPlayerName);
+                                    setAvailableFighters(
+                                        availableFighters.map(
+                                            f => ({
+                                                name: f.name,
+                                                checked: false,
+                                            })
+                                        )
+                                    );
+                                    setDrawerOpen(true);
+
                                     setNewPlayerName(
                                         ""
                                     );
