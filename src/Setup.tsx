@@ -131,7 +131,7 @@ export const Setup: React.FC<SetupProps> = ({
             </div>
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
-                    <h2 className="card-title">Choose Players</h2>
+                    <h2 className="card-title">Choose 2 Players</h2>
                     <div className="mt-2">
                         {
                             availablePlayers.map(
