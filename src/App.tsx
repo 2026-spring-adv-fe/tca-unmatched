@@ -10,6 +10,7 @@ import { Play } from './Play';
 import { 
   getGeneralFacts, 
   getLeaderboard, 
+  getPreviousPlayers, 
   type GameResult, 
 } from './GameResults';
 import { useEffect, useState } from 'react';
@@ -51,6 +52,9 @@ const App = () => {
   const [title, setTitle] = useState(APP_TITLE);
 
   const [theme, setTheme] = useState(DEFAULT_THEME);
+
+  // const [currentPlayers, setCurrentPlayers] = useState<string[]>([]);
+  const currentPlayersStateTuple = useState<string[]>([]);
 
   useEffect(
     () => {
@@ -110,7 +114,7 @@ const App = () => {
             checked={
               DEFAULT_THEME !== theme
             }
-            onClick={
+            onChange={
               async () => {
                 const result = await localforage.setItem<string>(
                   'theme',
@@ -169,6 +173,10 @@ const App = () => {
               element={
                 <Setup 
                   setTitle={setTitle}
+                  previousPlayers={
+                    getPreviousPlayers(gameResults)
+                  }
+                  setCurrentPlayers={currentPlayersStateTuple[1]}
                 />
               }
             />
@@ -180,6 +188,7 @@ const App = () => {
                   addNewGameResult={
                     addNewGameResult
                   }
+                  players={currentPlayersStateTuple[0]}
                 />
               }
             />          
