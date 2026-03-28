@@ -259,7 +259,7 @@ export const Setup: React.FC<SetupProps> = ({
         </>
             </div>
             <div className="drawer-side">
-                <label htmlFor="fighter-drawer" className="drawer-overlay" onClick={() => setDrawerOpen(false)}></label>
+                <label className="drawer-overlay" onClick={() => setDrawerOpen(false)}></label>
                 <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                     <h2 className="text-lg font-bold mb-4">
                         Choose Fighter for {choosingForPlayer}
