@@ -119,6 +119,25 @@ export const getPreviousPlayers = (
     )
 ;
 
+export const getPreviousFighters = (
+    games: GameResult[]
+) => games 
+    .flatMap(
+        x => x.players
+    )
+    .map(
+        x => x.fighter
+    )
+    .filter(
+        (x, i, a) => i == a.findIndex(
+            y => y == x
+        )
+    )
+    .sort(
+        (a, b) => a.localeCompare(b)
+    )
+;
+
 //
 // Helper funcs...
 //
