@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import type { GeneralFacts, LeaderboardEntry } from "./GameResults";
 import { useEffect } from "react";
 
-export const APP_TITLE = "UM Companion";
+export const APP_TITLE = "My UM Life";
 
 type HomeProps = {
     generalFacts: GeneralFacts,
@@ -28,19 +28,37 @@ export const Home: React.FC<HomeProps> = ({
     // Then return JSX...
     return (
         <>
-            <button 
-                className="btn btn-soft btn-lg w-full lg:w-64"
-                onClick={
-                    () => nav('/setup')
-                }
-            >
-                Setup a Game
-            </button>
+            <section className="card bg-base-100 border border-base-300 shadow-xl my-2">
+                <div className="card-body p-4 sm:p-6">
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                        <div className="space-y-2">
+                            <div className="badge badge-accent badge-outline badge-lg">
+                                Companion App
+                            </div>
+                            <h1 className="text-3xl sm:text-4xl font-bold">
+                                Player & Fighter Win Tracker
+                            </h1>
+                            <p className="opacity-80 max-w-2xl">
+                                Log your un-matches and enjoy some fun-facts forever.
+                            </p>
+                        </div>
+
+                        <button 
+                            className="btn btn-primary btn-lg w-full lg:w-auto"
+                            onClick={
+                                () => nav('/setup')
+                            }
+                        >
+                            Setup a Game
+                        </button>
+                    </div>
+                </div>
+            </section>
 
             <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
                 <div className="card-body p-2">
                     <h2 
-                        className="card-title text-nowrap"
+                        className="card-title text-nowrap ml-3"
                     >
                         General Facts
                     </h2>
@@ -69,7 +87,7 @@ export const Home: React.FC<HomeProps> = ({
             <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
                 <div className="card-body p-2">
                     <h2 
-                        className="card-title text-nowrap"
+                        className="card-title text-nowrap ml-3"
                     >
                         Player Leaderboard
                     </h2>
@@ -102,9 +120,9 @@ export const Home: React.FC<HomeProps> = ({
                                                         <td>
                                                             { x.avg }
                                                         </td>
-                                                        <td>
+                                                        <th>
                                                             { x.name }
-                                                        </td>
+                                                        </th>
                                                     </tr>
                                                 )
                                             )

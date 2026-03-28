@@ -59,7 +59,7 @@ export const Setup: React.FC<SetupProps> = ({
     return (
         <>
             <button 
-                className="btn btn-lg btn-soft w-full lg:w-64"
+                className="btn btn-primary btn-lg w-full lg:w-64 mb-4"
                 onClick={
                     () => {
                         setCurrentPlayers(
@@ -84,79 +84,87 @@ export const Setup: React.FC<SetupProps> = ({
                         : 'Start Game'
                 }
             </button>
-            <div 
-                className="join mt-4 w-full"
-            >
-                <input 
-                    type="text"
-                    className={`input join-item ${dupePlayerName ? 'input-error' : ''}`} 
-                    placeholder="New Player Name" 
-                    value={newPlayerName}
-                    onChange={
-                        (e) => setNewPlayerName(
-                            e.target.value
-                        )
-                    }
-                />
-                <button 
-                    className="btn join-item rounded-r-full"
-                    onClick={
-                        () => {
-                            setAvailablePlayers(
-                                [
-                                    ...availablePlayers,
-                                    {
-                                        name: newPlayerName,
-                                        checked: true,
-                                    },
-                                ].sort(
-                                    (a, b) => a.name.localeCompare(b.name)
+            <div className="card bg-base-100 w-full shadow-lg my-2">
+                <div className="card-body p-4 sm:p-6">
+                    <h2 className="card-title">Add Player</h2>
+                    <div className="join w-full mt-2">
+                        <input 
+                            type="text"
+                            className={`input join-item ${dupePlayerName ? 'input-error' : ''}`} 
+                            placeholder="New Player Name" 
+                            value={newPlayerName}
+                            onChange={
+                                (e) => setNewPlayerName(
+                                    e.target.value
                                 )
-                            );
-
-                            setNewPlayerName(
-                                ""
-                            );
-                        }
-                    }
-                    disabled={
-                        newPlayerName.length === 0 || dupePlayerName
-                    }
-                >
-                    Add
-                </button>
-            </div>
-            <div className="mt-4">
-                {
-                    availablePlayers.map(
-                        x => (
-                            <label
-                                key={x.name}
-                                className="block mt-2"
-                            >
-                                <input 
-                                    type="checkbox"
-                                    className="checkbox mr-2"
-                                    checked={x.checked} 
-                                    onChange={
-                                        () => setAvailablePlayers(
-                                            availablePlayers.map(
-                                                y => ({
-                                                    name: y.name,
-                                                    checked: y.name === x.name
-                                                        ? !y.checked
-                                                        : y.checked
-                                                    ,
-                                                })
-                                            )
+                            }
+                        />
+                        <button 
+                            className="btn btn-primary join-item rounded-r-full"
+                            onClick={
+                                () => {
+                                    setAvailablePlayers(
+                                        [
+                                            ...availablePlayers,
+                                            {
+                                                name: newPlayerName,
+                                                checked: true,
+                                            },
+                                        ].sort(
+                                            (a, b) => a.name.localeCompare(b.name)
                                         )
-                                    }
-                                />
-                                {x.name}
-                            </label>
-                        )
-                    )
-                }
+                                    );
+
+                                    setNewPlayerName(
+                                        ""
+                                    );
+                                }
+                            }
+                            disabled={
+                                newPlayerName.length === 0 || dupePlayerName
+                            }
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="card bg-base-100 w-full shadow-lg my-2">
+                <div className="card-body p-4 sm:p-6">
+                    <h2 className="card-title">Choose Players</h2>
+                    <div className="mt-2">
+                        {
+                            availablePlayers.map(
+                                x => (
+                                    <label
+                                        key={x.name}
+                                        className="block mt-2"
+                                    >
+                                        <input 
+                                            type="checkbox"
+                                            className="checkbox mr-2"
+                                            checked={x.checked} 
+                                            onChange={
+                                                () => setAvailablePlayers(
+                                                    availablePlayers.map(
+                                                        y => ({
+                                                            name: y.name,
+                                                            checked: y.name === x.name
+                                                                ? !y.checked
+                                                                : y.checked
+                                                            ,
+                                                        })
+                                                    )
+                                                )
+                                            }
+                                        />
+                                        {x.name}
+                                    </label>
+                                )
+                            )
+                        }
+                    </div>
+                </div>
             </div>
         </>
     );
