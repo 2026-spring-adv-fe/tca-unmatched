@@ -26,31 +26,38 @@ export const Play: React.FC<PlayProps> = ({
     // Then return JSX...
     return (
         <>
-            {
-                players.map(
-                    x => (
-                        <button 
-                            key={x}
-                            className="btn btn-primary btn-lg w-full lg:w-64 mb-2"
-                            onClick={
-                                () => {
-                                    addNewGameResult({
-                                        winner: x,
-                                        players: players,
-                                        start: startTimestamp,
-                                        end: new Date().toISOString(),
-                                    });
-                                    nav(-2);
-                                }
-                            }
-                        >
-                            {
-                                `${x} Won`
-                            }
-                        </button>
-                    )
-                )
-            }
+            <div className="card bg-base-100 w-full shadow-lg my-2">
+                <div className="card-body p-4 sm:p-6">
+                    <h2 className="card-title">Game Over</h2>
+                    <div className="flex flex-col gap-2 mt-2">
+                        {
+                            players.map(
+                                x => (
+                                    <button 
+                                        key={x}
+                                        className="btn btn-primary btn-lg w-full"
+                                        onClick={
+                                            () => {
+                                                addNewGameResult({
+                                                    winner: x,
+                                                    players: players,
+                                                    start: startTimestamp,
+                                                    end: new Date().toISOString(),
+                                                });
+                                                nav(-2);
+                                            }
+                                        }
+                                    >
+                                        {
+                                            `${x} Won`
+                                        }
+                                    </button>
+                                )
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
         </>
     );
 };
