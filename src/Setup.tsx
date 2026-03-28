@@ -25,6 +25,7 @@ export const Setup: React.FC<SetupProps> = ({
         previousPlayers.map(
             x => ({
                 name: x,
+                fighter: "",
                 checked: false,
             })
         )
@@ -112,6 +113,7 @@ export const Setup: React.FC<SetupProps> = ({
                                             ...availablePlayers,
                                             {
                                                 name: newPlayerName,
+                                                fighter: "",
                                                 checked: true,
                                             },
                                         ].sort(
@@ -153,6 +155,7 @@ export const Setup: React.FC<SetupProps> = ({
                                                     availablePlayers.map(
                                                         y => ({
                                                             name: y.name,
+                                                            fighter: y.fighter,
                                                             checked: y.name === x.name
                                                                 ? !y.checked
                                                                 : y.checked
@@ -162,7 +165,9 @@ export const Setup: React.FC<SetupProps> = ({
                                                 )
                                             }
                                         />
-                                        {x.name}
+                                        {
+                                            `${x.name} (${x.fighter.length > 0 ? x.fighter : "None"})`
+                                        }
                                     </label>
                                 )
                             )
