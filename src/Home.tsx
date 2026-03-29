@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import type { GeneralFacts, LeaderboardEntry, PlayerFighterMatrix, PlayerFighterCell } from "./GameResults";
+import type { GeneralFacts, LeaderboardEntry, PlayerFighterMatrix, PlayerFighterCell, FighterAvgDuration } from "./GameResults";
 import { useEffect, useRef, useState } from "react";
 
 export const APP_TITLE = "My UM Life";
@@ -9,6 +9,7 @@ type HomeProps = {
     leaderboard: LeaderboardEntry[],
     fighterLeaderboard: LeaderboardEntry[],
     playerFighterMatrix: PlayerFighterMatrix,
+    fighterAvgDurations: FighterAvgDuration[],
     setTitle: (t: string) => void,
 };
 
@@ -18,6 +19,7 @@ export const Home: React.FC<HomeProps> = ({
     leaderboard,
     fighterLeaderboard,
     playerFighterMatrix,
+    fighterAvgDurations,
     setTitle,
 }) => {
     
@@ -193,6 +195,61 @@ export const Home: React.FC<HomeProps> = ({
                     }
                 </div>
             </div>       
+            <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
+                <div className="card-body p-2">
+                    <h2 
+                        className="card-title text-nowrap ml-3"
+                    >
+                        Avg Game Length by Fighter
+                    </h2>
+                    {
+                        fighterAvgDurations.length === 0
+                            ? <p>N/A</p>
+                            : (
+                                <table className="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>FIGHTER</th>
+                                            <th>AVG WIN</th>
+                                            <th>AVG LOSS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            fighterAvgDurations.map(
+                                                x => (
+                                                    <tr
+                                                        key={x.fighter}
+                                                    >
+                                                        <th>
+                                                            { x.fighter }
+                                                        </th>
+                                                        <td className="text-primary">
+                                                            { x.avgWin }
+                                                            {x.winGames > 0 && (
+                                                                <span className="text-xs opacity-50 ml-1">
+                                                                    ({x.winGames})
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            { x.avgLoss }
+                                                            {x.lossGames > 0 && (
+                                                                <span className="text-xs opacity-50 ml-1">
+                                                                    ({x.lossGames})
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                    }
+                </div>
+            </div>
             <div className="card bg-base-100 w-full shadow-lg my-5">
                 <div className="card-body p-2">
                     <h2 className="card-title text-nowrap ml-3">

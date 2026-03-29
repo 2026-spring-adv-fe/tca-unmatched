@@ -158,6 +158,44 @@ export const getPreviousFighters = (
     )
 ;
 
+export type FighterAvgDuration = {
+    fighter: string;
+    avgWin: string;
+    avgLoss: string;
+    winGames: number;
+    lossGames: number;
+};
+
+export const getFighterAvgDurations = (games: GameResult[]): FighterAvgDuration[] => {
+    const fighters = getPreviousFighters(games);
+
+    return fighters.map(fighter => {
+        const fighterGames = games.filter(g =>
+            g.players.some(p => p.fighter === fighter)
+        );
+
+        const wins = fighterGames.filter(g =>
+            g.players.some(p => p.fighter === fighter && p.name === g.winner)
+        );
+        const losses = fighterGames.filter(g =>
+            g.players.some(p => p.fighter === fighter && p.name !== g.winner)
+        );
+
+        const avgMs = (gs: GameResult[]) =>
+            gs.length === 0
+                ? 0
+                : gs.reduce((sum, g) => sum + (Date.parse(g.end) - Date.parse(g.start)), 0) / gs.length;
+
+        return {
+            fighter,
+            avgWin: wins.length > 0 ? formatGameDuration(avgMs(wins)) : "—",
+            avgLoss: losses.length > 0 ? formatGameDuration(avgMs(losses)) : "—",
+            winGames: wins.length,
+            lossGames: losses.length,
+        };
+    }).sort((a, b) => (b.winGames + b.lossGames) - (a.winGames + a.lossGames));
+};
+
 export type PlayerFighterCell = {
     player: string;
     fighter: string;

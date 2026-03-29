@@ -9,6 +9,7 @@ import { Setup } from './Setup';
 import { Play } from './Play';
 import { 
   getGeneralFacts, 
+  getFighterAvgDurations,
   getFighterLeaderboard,
   getLeaderboard, 
   getPlayerFighterMatrix,
@@ -447,6 +448,9 @@ const App = () => {
                   }
                   playerFighterMatrix={
                     getPlayerFighterMatrix(gameResults)
+                  }
+                  fighterAvgDurations={
+                    getFighterAvgDurations(gameResults)
                   }
                 />
               }
