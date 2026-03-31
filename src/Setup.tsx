@@ -71,7 +71,7 @@ export const Setup: React.FC<SetupProps> = ({
     );
 
     const twoPlayersChosen = availablePlayers.filter(
-        x => x.checked
+            x => x.checked && x.fighter.length > 0
     ).length === 2;
 
     //
@@ -177,6 +177,7 @@ export const Setup: React.FC<SetupProps> = ({
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
                     <h2 className="card-title">Choose 2 Players</h2>
+                    <span className="badge badge-ghost badge-sm font-normal ml-0">And their Fighters</span>
                     <div className="mt-2">
                         {
                             availablePlayers.map(
