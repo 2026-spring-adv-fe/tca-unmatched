@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
-import type { GameResult } from "./GameResults";
+import type { GameResult, Player } from "./GameResults";
 import { useEffect, useState } from "react";
 
 type PlayProps = {
     addNewGameResult: (g: GameResult) => void;
     setTitle: (t: string) => void;
-    players: string[];
+    players: Player[];
 };
 
 export const Play: React.FC<PlayProps> = ({
@@ -34,12 +34,12 @@ export const Play: React.FC<PlayProps> = ({
                             players.map(
                                 x => (
                                     <button 
-                                        key={x}
+                                        key={x.name}
                                         className="btn btn-primary btn-lg w-full lg:w-64"
                                         onClick={
                                             () => {
                                                 addNewGameResult({
-                                                    winner: x,
+                                                    winner: x.name,
                                                     players: players,
                                                     start: startTimestamp,
                                                     end: new Date().toISOString(),
@@ -49,7 +49,7 @@ export const Play: React.FC<PlayProps> = ({
                                         }
                                     >
                                         {
-                                            `${x} Won`
+                                            `${x.name} (${x.fighter}) Won`
                                         }
                                     </button>
                                 )

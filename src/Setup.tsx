@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import type { Player } from "./GameResults";
 
 type SetupProps = {
     setTitle: (t: string) => void;
     previousPlayers: string[];
-    setCurrentPlayers: (players: string[]) => void;
+    previousFighters: string[];
+    setCurrentPlayers: (players: Player[]) => void;
 };
 
 export const Setup: React.FC<SetupProps> = ({
     setTitle,
     previousPlayers,
+    previousFighters,
     setCurrentPlayers,
 }) => {
 
@@ -24,10 +27,24 @@ export const Setup: React.FC<SetupProps> = ({
         previousPlayers.map(
             x => ({
                 name: x,
+                fighter: "",
                 checked: false,
             })
         )
     );
+
+    const [availableFighters, setAvailableFighters] = useState(
+        previousFighters.map(
+            x => ({
+                name: x,
+                checked: false,
+            })
+        )
+    );
+
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [choosingForPlayer, setChoosingForPlayer] = useState("");
+    const [newFighterName, setNewFighterName] = useState("");
 
     useEffect(
         () => setTitle("Setup"),
@@ -49,6 +66,10 @@ export const Setup: React.FC<SetupProps> = ({
         x => x.name === newPlayerName
     );
 
+    const dupeFighterName = availableFighters.some(
+        x => x.name === newFighterName
+    );
+
     const twoPlayersChosen = availablePlayers.filter(
         x => x.checked
     ).length === 2;
@@ -57,7 +78,16 @@ export const Setup: React.FC<SetupProps> = ({
     // Then return JSX...
     //
     return (
-        <>
+        <div className="drawer drawer-end">
+            <input 
+                id="fighter-drawer" 
+                type="checkbox" 
+                className="drawer-toggle" 
+                checked={drawerOpen}
+                onChange={() => setDrawerOpen(!drawerOpen)}
+            />
+            <div className="drawer-content">
+            <>
             <button 
                 className="btn btn-primary btn-lg w-full lg:w-64 mb-4"
                 onClick={
@@ -68,7 +98,10 @@ export const Setup: React.FC<SetupProps> = ({
                                     x => x.checked
                                 )
                                 .map(
-                                    x => x.name
+                                    x => ({
+                                        name: x.name,
+                                        fighter: x.fighter,
+                                    })
                                 )
                         );
                         nav('/play');
@@ -108,12 +141,24 @@ export const Setup: React.FC<SetupProps> = ({
                                             ...availablePlayers,
                                             {
                                                 name: newPlayerName,
+                                                fighter: "",
                                                 checked: true,
                                             },
                                         ].sort(
                                             (a, b) => a.name.localeCompare(b.name)
                                         )
                                     );
+
+                                    setChoosingForPlayer(newPlayerName);
+                                    setAvailableFighters(
+                                        availableFighters.map(
+                                            f => ({
+                                                name: f.name,
+                                                checked: false,
+                                            })
+                                        )
+                                    );
+                                    setDrawerOpen(true);
 
                                     setNewPlayerName(
                                         ""
@@ -145,20 +190,65 @@ export const Setup: React.FC<SetupProps> = ({
                                             className="checkbox mr-2"
                                             checked={x.checked} 
                                             onChange={
-                                                () => setAvailablePlayers(
-                                                    availablePlayers.map(
-                                                        y => ({
-                                                            name: y.name,
-                                                            checked: y.name === x.name
-                                                                ? !y.checked
-                                                                : y.checked
-                                                            ,
-                                                        })
-                                                    )
-                                                )
+                                                () => {
+                                                    if (!x.checked) {
+                                                        setChoosingForPlayer(x.name);
+                                                        setAvailableFighters(
+                                                            availableFighters.map(
+                                                                f => ({
+                                                                    name: f.name,
+                                                                    checked: f.name === x.fighter,
+                                                                })
+                                                            )
+                                                        );
+                                                        setDrawerOpen(true);
+                                                    }
+                                                    setAvailablePlayers(
+                                                        availablePlayers.map(
+                                                            y => ({
+                                                                name: y.name,
+                                                                fighter: y.name === x.name && x.checked
+                                                                    ? ""
+                                                                    : y.fighter,
+                                                                checked: y.name === x.name
+                                                                    ? !y.checked
+                                                                    : y.checked
+                                                                ,
+                                                            })
+                                                        )
+                                                    );
+                                                }
                                             }
                                         />
-                                        {x.name}
+                                        {`${x.name} `}
+                                        {
+                                            x.fighter.length > 0
+                                                ? (
+                                                    <>
+                                                    (<a
+                                                        className="link link-primary"
+                                                        onClick={
+                                                            (e) => {
+                                                                e.preventDefault();
+                                                                setChoosingForPlayer(x.name);
+                                                                setAvailableFighters(
+                                                                    availableFighters.map(
+                                                                        f => ({
+                                                                            name: f.name,
+                                                                            checked: f.name === x.fighter,
+                                                                        })
+                                                                    )
+                                                                );
+                                                                setDrawerOpen(true);
+                                                            }
+                                                        }
+                                                    >
+                                                        {x.fighter}
+                                                    </a>)
+                                                    </>
+                                                )
+                                                : "(None)"
+                                        }
                                     </label>
                                 )
                             )
@@ -167,5 +257,93 @@ export const Setup: React.FC<SetupProps> = ({
                 </div>
             </div>
         </>
+            </div>
+            <div className="drawer-side">
+                <label className="drawer-overlay" onClick={() => setDrawerOpen(false)}></label>
+                <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                    <h2 className="text-lg font-bold mb-4">
+                        Choose Fighter for {choosingForPlayer}
+                    </h2>
+                    <div className="join w-full mb-4">
+                        <input 
+                            type="text"
+                            className={`input join-item ${dupeFighterName ? 'input-error' : ''}`}
+                            placeholder="New Fighter Name"
+                            value={newFighterName}
+                            onChange={
+                                (e) => setNewFighterName(e.target.value)
+                            }
+                        />
+                        <button 
+                            className="btn btn-primary join-item rounded-r-full"
+                            onClick={
+                                () => {
+                                    setAvailableFighters(
+                                        [
+                                            ...availableFighters,
+                                            {
+                                                name: newFighterName,
+                                                checked: false,
+                                            },
+                                        ].sort(
+                                            (a, b) => a.name.localeCompare(b.name)
+                                        )
+                                    );
+                                    setNewFighterName("");
+                                }
+                            }
+                            disabled={
+                                newFighterName.length === 0 || dupeFighterName
+                            }
+                        >
+                            Add
+                        </button>
+                    </div>
+                    {
+                        availableFighters.map(
+                            x => (
+                                <label
+                                    key={x.name}
+                                    className="block mt-2"
+                                >
+                                    <input 
+                                        type="radio"
+                                        name="fighter-choice"
+                                        className="radio mr-2"
+                                        checked={x.checked}
+                                        onChange={() => {}}
+                                        onClick={
+                                            () => {
+                                                setAvailablePlayers(
+                                                    availablePlayers.map(
+                                                        y => ({
+                                                            ...y,
+                                                            fighter: y.name === choosingForPlayer
+                                                                ? x.name
+                                                                : y.fighter
+                                                            ,
+                                                        })
+                                                    )
+                                                );
+                                                setAvailableFighters(
+                                                    availableFighters.map(
+                                                        y => ({
+                                                            name: y.name,
+                                                            checked: y.name === x.name,
+                                                        })
+                                                    )
+                                                );
+                                                setDrawerOpen(false);
+                                            }
+                                        }
+                                    />
+                                    {x.name}
+                                </label>
+                            )
+                        )
+                    }
+                </div>
+            </div>
+        </div>
     );
 };
