@@ -104,7 +104,7 @@ export const Home: React.FC<HomeProps> = ({
                     </h2>
                     {
                         leaderboard.length === 0
-                            ? <p>N/A</p>
+                            ? <p className="ml-3">N/A</p>
                             : (
                                 <table className="table table-zebra">
                                     <thead>
@@ -153,7 +153,7 @@ export const Home: React.FC<HomeProps> = ({
                     </h2>
                     {
                         fighterLeaderboard.length === 0
-                            ? <p>N/A</p>
+                            ? <p className="ml-3">N/A</p>
                             : (
                                 <table className="table table-zebra">
                                     <thead>
