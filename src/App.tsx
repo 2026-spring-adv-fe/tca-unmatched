@@ -320,6 +320,8 @@ const dummyGameResults: GameResult[] = [
 
 const App = () => {
 
+  console.log(dummyGameResults);
+  
   //
   // React hooks...
   //
