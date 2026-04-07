@@ -123,7 +123,7 @@ export const Setup: React.FC<SetupProps> = ({
                     <div className="join w-full mt-2">
                         <input 
                             type="text"
-                            className={`input join-item ${dupePlayerName ? 'input-error' : ''}`} 
+                            className={`input input-lg join-item ${dupePlayerName ? 'input-error' : ''}`} 
                             placeholder="New Player Name" 
                             value={newPlayerName}
                             onChange={
@@ -133,7 +133,7 @@ export const Setup: React.FC<SetupProps> = ({
                             }
                         />
                         <button 
-                            className="btn btn-primary join-item rounded-r-full"
+                            className="btn btn-lg btn-primary join-item rounded-r-full"
                             onClick={
                                 () => {
                                     setAvailablePlayers(
@@ -184,7 +184,7 @@ export const Setup: React.FC<SetupProps> = ({
                                 x => (
                                     <label
                                         key={x.name}
-                                        className="block mt-2"
+                                        className="text-lg mt-2 flex items-center gap-1"
                                     >
                                         <input 
                                             type="checkbox"
@@ -268,7 +268,7 @@ export const Setup: React.FC<SetupProps> = ({
                     <div className="join w-full mb-4">
                         <input 
                             type="text"
-                            className={`input join-item ${dupeFighterName ? 'input-error' : ''}`}
+                            className={`input input-lg input join-item ${dupeFighterName ? 'input-error' : ''}`}
                             placeholder="New Fighter Name"
                             value={newFighterName}
                             onChange={
@@ -276,7 +276,7 @@ export const Setup: React.FC<SetupProps> = ({
                             }
                         />
                         <button 
-                            className="btn btn-primary join-item rounded-r-full"
+                            className="btn btn-lg btn-primary join-item rounded-r-full"
                             onClick={
                                 () => {
                                     setAvailableFighters(
@@ -305,12 +305,12 @@ export const Setup: React.FC<SetupProps> = ({
                             x => (
                                 <label
                                     key={x.name}
-                                    className="block mt-2"
+                                    className="text-lg mt-2 flex items-center gap-1"
                                 >
                                     <input 
                                         type="radio"
                                         name="fighter-choice"
-                                        className="radio mr-2"
+                                        className="radio radio-lg mr-2"
                                         checked={x.checked}
                                         onChange={() => {}}
                                         onClick={
