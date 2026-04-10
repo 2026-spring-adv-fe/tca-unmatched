@@ -1,5 +1,20 @@
 import { useNavigate } from "react-router";
 import type { GeneralFacts, LeaderboardEntry, PlayerFighterMatrix, PlayerFighterCell } from "./GameResults";
+
+const getRanks = (entries: LeaderboardEntry[]): string[] => {
+    const ranks: string[] = [];
+    for (let i = 0; i < entries.length; i++) {
+        if (i > 0 && entries[i].avg === entries[i - 1].avg) {
+            ranks.push(ranks[i - 1]);
+        } else {
+            ranks.push(String(i + 1));
+        }
+    }
+    // Prefix tied ranks with "T"
+    const counts = new Map<string, number>();
+    ranks.forEach(r => counts.set(r, (counts.get(r) ?? 0) + 1));
+    return ranks.map(r => (counts.get(r)! > 1 ? `T${r}` : r));
+};
 import { useEffect, useRef, useState } from "react";
 
 export const APP_TITLE = "My UM Life";
@@ -81,7 +96,7 @@ export const Home: React.FC<HomeProps> = ({
                             </tr>
                             <tr>
                                 <td>Total Games</td>
-                                <th>{generalFacts.totalGames}</th>
+                                <th>{generalFacts.totalGames / 0}</th>
                             </tr>
                             <tr>
                                 <td>Shortest Game</td>
@@ -109,6 +124,7 @@ export const Home: React.FC<HomeProps> = ({
                                 <table className="table table-zebra">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>W</th>
                                             <th>L</th>
                                             <th>AVG</th>
@@ -117,26 +133,32 @@ export const Home: React.FC<HomeProps> = ({
                                     </thead>
                                     <tbody>
                                         {
-                                            leaderboard.map(
-                                                x => (
-                                                    <tr
-                                                        key={x.name}
-                                                    >
-                                                        <td>
-                                                            { x.wins }
-                                                        </td>
-                                                        <td>
-                                                            { x.losses }
-                                                        </td>
-                                                        <td>
-                                                            { x.avg }
-                                                        </td>
-                                                        <th>
-                                                            { x.name }
-                                                        </th>
-                                                    </tr>
-                                                )
-                                            )
+                                            (() => {
+                                                const ranks = getRanks(leaderboard);
+                                                return leaderboard.map(
+                                                    (x, i) => (
+                                                        <tr
+                                                            key={x.name}
+                                                        >
+                                                            <th>
+                                                                { ranks[i] }
+                                                            </th>
+                                                            <td>
+                                                                { x.wins }
+                                                            </td>
+                                                            <td>
+                                                                { x.losses }
+                                                            </td>
+                                                            <td>
+                                                                { x.avg }
+                                                            </td>
+                                                            <th>
+                                                                { x.name }
+                                                            </th>
+                                                        </tr>
+                                                    )
+                                                );
+                                            })()
                                         }
                                     </tbody>
                                 </table>
@@ -158,6 +180,7 @@ export const Home: React.FC<HomeProps> = ({
                                 <table className="table table-zebra">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>W</th>
                                             <th>L</th>
                                             <th>AVG</th>
@@ -166,26 +189,32 @@ export const Home: React.FC<HomeProps> = ({
                                     </thead>
                                     <tbody>
                                         {
-                                            fighterLeaderboard.map(
-                                                x => (
-                                                    <tr
-                                                        key={x.name}
-                                                    >
-                                                        <td>
-                                                            { x.wins }
-                                                        </td>
-                                                        <td>
-                                                            { x.losses }
-                                                        </td>
-                                                        <td>
-                                                            { x.avg }
-                                                        </td>
-                                                        <th>
-                                                            { x.name }
-                                                        </th>
-                                                    </tr>
-                                                )
-                                            )
+                                            (() => {
+                                                const ranks = getRanks(fighterLeaderboard);
+                                                return fighterLeaderboard.map(
+                                                    (x, i) => (
+                                                        <tr
+                                                            key={x.name}
+                                                        >
+                                                            <th>
+                                                                { ranks[i] }
+                                                            </th>
+                                                            <td>
+                                                                { x.wins }
+                                                            </td>
+                                                            <td>
+                                                                { x.losses }
+                                                            </td>
+                                                            <td>
+                                                                { x.avg }
+                                                            </td>
+                                                            <th>
+                                                                { x.name }
+                                                            </th>
+                                                        </tr>
+                                                    )
+                                                );
+                                            })()
                                         }
                                     </tbody>
                                 </table>
