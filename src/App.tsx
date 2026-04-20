@@ -511,7 +511,7 @@ const App = () => {
 
             <input 
                 type="text"
-                className='input input-bordered w-full mt-3'
+                className='input input-bordered w-full mt-3 text-lg'
                 placeholder="Email address" 
                 value={emailInDialog}
                 onChange={
@@ -523,7 +523,17 @@ const App = () => {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
-                <button className="btn">Save</button>
+                <button 
+                  className="btn btn-primary btn-lg"
+                  onClick={
+                    async () => await localforage.setItem(
+                      "email",
+                      emailInDialog,
+                    )
+                  }
+                >
+                  Save
+                </button>
               </form>
             </div>
           </div>
