@@ -329,8 +329,8 @@ const App = () => {
   //
   // React hooks, useState, useRef, useEffect...
   //
-  const [gameResults, setGameResults] = useState(dummyGameResults);
-  // const [gameResults, setGameResults] = useState<GameResult[]>([]);
+  // const [gameResults, setGameResults] = useState(dummyGameResults);
+  const [gameResults, setGameResults] = useState<GameResult[]>([]);
 
   const [title, setTitle] = useState(APP_TITLE);
 
@@ -387,6 +387,33 @@ const App = () => {
       }
     }, 
     [],
+  );  
+
+  useEffect(
+    () => {
+      const loadGames = async () => {
+
+        const games = await loadGamesFromCloud(
+          emailForCoudApi,
+          "tca-unmatched-26s"
+        );
+
+        if (!ignore) {
+          setGameResults(games);
+        }
+      }
+
+      let ignore = false;
+
+      if (emailForCoudApi.length > 0) {
+        loadGames();
+      }
+
+      return () => {
+        ignore = true;
+      }
+    }, 
+    [emailForCoudApi],
   );  
 
   //
@@ -580,7 +607,9 @@ const App = () => {
                         emailInDialog,
                       );
 
-                      setEmailForCloudApi(savedEmail);
+                      if (savedEmail.length > 0) {
+                        setEmailForCloudApi(savedEmail);
+                      }
                     }
                   }
                 >
