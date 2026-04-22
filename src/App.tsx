@@ -19,6 +19,10 @@ import {
 } from './GameResults';
 import { useEffect, useRef, useState } from 'react';
 import localforage from 'localforage';
+import {
+  saveGameToCloud,
+  loadGamesFromCloud,
+} from './tca-cloud-api';
 
 const DEFAULT_THEME = "light";
 
@@ -325,8 +329,8 @@ const App = () => {
   //
   // React hooks, useState, useRef, useEffect...
   //
-  const [gameResults, setGameResults] = useState(dummyGameResults);
-  // const [gameResults, setGameResults] = useState<GameResult[]>([]);
+  // const [gameResults, setGameResults] = useState(dummyGameResults);
+  const [gameResults, setGameResults] = useState<GameResult[]>([]);
 
   const [title, setTitle] = useState(APP_TITLE);
 
@@ -335,7 +339,10 @@ const App = () => {
   const [currentPlayers, setCurrentPlayers] = useState<Player[]>([]);
   // const currentPlayersStateTuple = useState<Player[]>([]);
 
-  const [emailInDialog, setEmailInDialog] = useState("foo@bar.com");
+  const [emailInDialog, setEmailInDialog] = useState("");
+
+  const [emailForCoudApi, setEmailForCloudApi] = useState("");
+
 
   const emailDialog = useRef<HTMLDialogElement>(null);
 
@@ -368,6 +375,7 @@ const App = () => {
 
         if (!ignore) {
           setEmailInDialog(result);
+          setEmailForCloudApi(result);
         }
       }
 
@@ -381,15 +389,59 @@ const App = () => {
     [],
   );  
 
+  useEffect(
+    () => {
+      const loadGames = async () => {
+
+        const games = await loadGamesFromCloud(
+          emailForCoudApi,
+          "tca-unmatched-26s"
+        );
+
+        if (!ignore) {
+          setGameResults(games);
+        }
+      }
+
+      let ignore = false;
+
+      if (emailForCoudApi.length > 0) {
+        loadGames();
+      }
+
+      return () => {
+        ignore = true;
+      }
+    }, 
+    [emailForCoudApi],
+  );  
+
   //
   // Calculated state and other funcs...
   //
-  const addNewGameResult = (gameResult: GameResult) => setGameResults(
-    [
-      ...gameResults,
-      gameResult,
-    ]
-  );
+  const addNewGameResult = async (gameResult: GameResult) => {
+    // First, save the game result to the cloud...
+    if (emailForCoudApi.length > 0) {
+      await saveGameToCloud(
+        emailForCoudApi,
+        "tca-unmatched-26s",
+        gameResult.end,
+        gameResult,
+      );
+    }
+
+    //
+    // Second, optimistically update local state...
+    //
+    // Assume it was correctly saved to the cloud above : - /
+    //
+    setGameResults(
+      [
+        ...gameResults,
+        gameResult,
+      ]
+    );
+  }
 
   //
   // Return JSX...
@@ -549,10 +601,16 @@ const App = () => {
                 <button 
                   className="btn btn-primary btn-lg"
                   onClick={
-                    async () => await localforage.setItem(
-                      "email",
-                      emailInDialog,
-                    )
+                    async () => {
+                      const savedEmail = await localforage.setItem(
+                        "email",
+                        emailInDialog,
+                      );
+
+                      if (savedEmail.length > 0) {
+                        setEmailForCloudApi(savedEmail);
+                      }
+                    }
                   }
                 >
                   Save
