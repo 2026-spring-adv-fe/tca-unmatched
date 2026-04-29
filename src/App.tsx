@@ -15,7 +15,8 @@ import {
   getPreviousFighters,
   getPreviousPlayers, 
   type GameResult,
-  type Player, 
+  type Player,
+  getReverseChronGameData, 
 } from './GameResults';
 import { useEffect, useRef, useState } from 'react';
 import localforage from 'localforage';
@@ -544,6 +545,9 @@ const App = () => {
                   }
                   playerFighterMatrix={
                     getPlayerFighterMatrix(gameResults)
+                  }
+                  gameHistory={
+                    getReverseChronGameData(gameResults)
                   }
                 />
               }
