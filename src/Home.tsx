@@ -44,7 +44,7 @@ export const Home: React.FC<HomeProps> = ({
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-2">
                             <div className="badge badge-accent badge-outline badge-lg">
-                                Companion App
+                                Unmatched&trade; Companion App
                             </div>
                             <h1 className="text-3xl sm:text-4xl font-bold">
                                 Player & Fighter Win Tracker
@@ -109,6 +109,7 @@ export const Home: React.FC<HomeProps> = ({
                                 <table className="table table-zebra">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>W</th>
                                             <th>L</th>
                                             <th>AVG</th>
@@ -118,10 +119,21 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             leaderboard.map(
-                                                x => (
+                                                (x, i) => {
+                                                    let trueRank = i + 1;
+                                                    for (let j = i - 1; j >= 0; j--) {
+                                                        if (leaderboard[j].avg === x.avg) trueRank = j + 1;
+                                                        else break;
+                                                    }
+                                                    const isTied = (i > 0 && leaderboard[i - 1].avg === x.avg) || (i < leaderboard.length - 1 && leaderboard[i + 1]?.avg === x.avg);
+                                                    const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    return (
                                                     <tr
                                                         key={x.name}
                                                     >
+                                                        <th>
+                                                            { rankStr }
+                                                        </th>
                                                         <td>
                                                             { x.wins }
                                                         </td>
@@ -135,7 +147,8 @@ export const Home: React.FC<HomeProps> = ({
                                                             { x.name }
                                                         </th>
                                                     </tr>
-                                                )
+                                                    );
+                                                }
                                             )
                                         }
                                     </tbody>
@@ -158,6 +171,7 @@ export const Home: React.FC<HomeProps> = ({
                                 <table className="table table-zebra">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>W</th>
                                             <th>L</th>
                                             <th>AVG</th>
@@ -167,10 +181,21 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             fighterLeaderboard.map(
-                                                x => (
+                                                (x, i) => {
+                                                    let trueRank = i + 1;
+                                                    for (let j = i - 1; j >= 0; j--) {
+                                                        if (fighterLeaderboard[j].avg === x.avg) trueRank = j + 1;
+                                                        else break;
+                                                    }
+                                                    const isTied = (i > 0 && fighterLeaderboard[i - 1].avg === x.avg) || (i < fighterLeaderboard.length - 1 && fighterLeaderboard[i + 1]?.avg === x.avg);
+                                                    const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    return (
                                                     <tr
                                                         key={x.name}
                                                     >
+                                                        <th>
+                                                            { rankStr }
+                                                        </th>
                                                         <td>
                                                             { x.wins }
                                                         </td>
@@ -184,7 +209,8 @@ export const Home: React.FC<HomeProps> = ({
                                                             { x.name }
                                                         </th>
                                                     </tr>
-                                                )
+                                                    );
+                                                }
                                             )
                                         }
                                     </tbody>
