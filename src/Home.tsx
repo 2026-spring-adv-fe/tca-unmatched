@@ -10,6 +10,12 @@ type HomeProps = {
     fighterLeaderboard: LeaderboardEntry[],
     playerFighterMatrix: PlayerFighterMatrix,
     setTitle: (t: string) => void,
+    // gameHistory: any,
+    gameHistory: {
+        date: string;
+        duration: string;
+        players: string;
+    }[];
 };
 
 
@@ -19,6 +25,7 @@ export const Home: React.FC<HomeProps> = ({
     fighterLeaderboard,
     playerFighterMatrix,
     setTitle,
+    gameHistory,
 }) => {
     
     useEffect(
@@ -283,7 +290,53 @@ export const Home: React.FC<HomeProps> = ({
                     )}
                 </div>
             </div>
-
+            <div className="card bg-base-100 w-full shadow-lg my-5 overflow-x-scroll">
+                <div className="card-body p-2">
+                    <h2 
+                        className="card-title text-nowrap ml-3"
+                    >
+                        Game History
+                    </h2>
+                    {
+                        gameHistory.length === 0
+                            ? <p className="ml-3">N/A</p>
+                            : (
+                                <table className="table table-zebra">
+                                    <thead>
+                                        <tr
+                                            className="uppercase"
+                                        >
+                                            <th>Date</th>
+                                            <th>Duration</th>
+                                            <th>Players</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            gameHistory.map(
+                                                x => (
+                                                    <tr
+                                                        key={x.date}
+                                                    >
+                                                        <td>
+                                                            {x.date}
+                                                        </td>
+                                                        <td>
+                                                            {x.duration}
+                                                        </td>
+                                                        <td>
+                                                            {x.players}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                    }
+                </div>
+            </div> 
             <dialog ref={heatmapModalRef} className="modal">
                 <div className="modal-box">
                     {selectedCell && (
