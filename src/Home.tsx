@@ -302,7 +302,9 @@ export const Home: React.FC<HomeProps> = ({
                             ? <p className="ml-3">N/A</p>
                             : (
                                 <table className="table table-zebra">
-                                    <thead>
+                                    <thead
+                                        className="uppercase"
+                                    >
                                         <tr>
                                             <th>
                                                 Date
