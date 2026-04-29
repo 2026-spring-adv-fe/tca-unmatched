@@ -598,6 +598,9 @@ const App = () => {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-link btn-lg">
+                  Cancel
+                </button>
                 <button 
                   className="btn btn-primary btn-lg"
                   onClick={
