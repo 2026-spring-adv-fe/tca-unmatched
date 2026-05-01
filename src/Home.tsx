@@ -314,9 +314,9 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             gameHistory.map(
-                                                x => (
+                                                (x, i) => (
                                                     <tr
-                                                        key={x.date}
+                                                        key={i}
                                                     >
                                                         <td>
                                                             {x.date}
