@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/tca-unmatched/sw.js', { scope: '/tca-unmatched/' })})}
