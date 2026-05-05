@@ -342,7 +342,7 @@ const App = () => {
 
   const [emailInDialog, setEmailInDialog] = useState("");
 
-  const [emailForCoudApi, setEmailForCloudApi] = useState("");
+  const [emailForCloudApi, setEmailForCloudApi] = useState("");
 
 
   const emailDialog = useRef<HTMLDialogElement>(null);
@@ -395,7 +395,7 @@ const App = () => {
       const loadGames = async () => {
 
         const games = await loadGamesFromCloud(
-          emailForCoudApi,
+          emailForCloudApi,
           "tca-unmatched-26s"
         );
 
@@ -406,7 +406,7 @@ const App = () => {
 
       let ignore = false;
 
-      if (emailForCoudApi.length > 0) {
+      if (emailForCloudApi.length > 0) {
         loadGames();
       }
 
@@ -414,7 +414,7 @@ const App = () => {
         ignore = true;
       }
     }, 
-    [emailForCoudApi],
+    [emailForCloudApi],
   );  
 
   //
@@ -422,9 +422,9 @@ const App = () => {
   //
   const addNewGameResult = async (gameResult: GameResult) => {
     // First, save the game result to the cloud...
-    if (emailForCoudApi.length > 0) {
+    if (emailForCloudApi.length > 0) {
       await saveGameToCloud(
-        emailForCoudApi,
+        emailForCloudApi,
         "tca-unmatched-26s",
         gameResult.end,
         gameResult,
@@ -571,11 +571,18 @@ const App = () => {
               path='/play'
               element={
                 <Play 
-                  setTitle={setTitle}
+                  setTitle={
+                    setTitle
+                  }
                   addNewGameResult={
                     addNewGameResult
                   }
-                  players={currentPlayers}
+                  players={
+                    currentPlayers
+                  }
+                  enableSave={
+                    emailForCloudApi.trim().length > 0
+                  }
                 />
               }
             />          
@@ -614,9 +621,7 @@ const App = () => {
                         emailInDialog,
                       );
 
-                      if (savedEmail.length > 0) {
-                        setEmailForCloudApi(savedEmail);
-                      }
+                      setEmailForCloudApi(savedEmail);
                     }
                   }
                 >

@@ -6,12 +6,14 @@ type PlayProps = {
     addNewGameResult: (g: GameResult) => void;
     setTitle: (t: string) => void;
     players: Player[];
+    enableSave: boolean;
 };
 
 export const Play: React.FC<PlayProps> = ({
     addNewGameResult,
     setTitle,
     players,
+    enableSave,
 }) => {
 
     useEffect(
@@ -29,6 +31,14 @@ export const Play: React.FC<PlayProps> = ({
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
                     <h2 className="card-title">Game Over</h2>
+                    <p
+                        className="mt-1"
+                    >
+                        Save game result
+                    </p>
+                    <div className="badge badge-accent badge-outline badge-lg">
+                        Email <span className="text-xl">⛭</span> (above) required
+                    </div>
                     <div className="flex flex-col gap-2 mt-2">
                         {
                             players.map(
@@ -36,6 +46,9 @@ export const Play: React.FC<PlayProps> = ({
                                     <button 
                                         key={x.name}
                                         className="btn btn-primary btn-lg w-full lg:w-64"
+                                        disabled={
+                                            !enableSave
+                                        }
                                         onClick={
                                             () => {
                                                 addNewGameResult({
@@ -55,6 +68,21 @@ export const Play: React.FC<PlayProps> = ({
                                 )
                             )
                         }
+                    </div>
+                    <div>
+                        <p
+                            className="mt-5"
+                        >
+                            Don't save game result
+                        </p>
+                        <button 
+                            className="btn btn-lg btn-link p-0"
+                            onClick={
+                                () => nav(-2)
+                            }
+                        >
+                            Quit
+                        </button>
                     </div>
                 </div>
             </div>
