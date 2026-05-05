@@ -208,10 +208,13 @@ export const getReverseChronGameData = (results: GameResult[]) => results
                 Date.parse(x.end) - Date.parse(x.start)
             ),
             players: x.players
-                .map(
-                    y => `${y.name}${y.name === x.winner ? ' (W)' : ''}`
+                .sort(
+                    (a) => a.name === x.winner ? -1 : 0
                 )
-                .join(", ")
+                .map(
+                    y => `${y.name} (${y.fighter})`
+                )
+                .join(" beat ")
             ,
         })
     )
