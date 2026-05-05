@@ -38,11 +38,15 @@ export const Play: React.FC<PlayProps> = ({
                     >
                         Save game result
                     </p>
-                    <div 
-                        className="badge badge-ghost badge-sm font-normal ml-0"
-                    >
-                        Email <span className="text-xl mb-1">⚙</span> (above) required
-                    </div>
+                    {
+                        !enableSave && (
+                            <div 
+                                className="badge badge-ghost badge-sm font-normal ml-0"
+                            >
+                                Email <span className="text-xl mb-1">⚙</span> (above) required
+                            </div>
+                        )
+                    }
                     <div className="flex flex-col gap-2 mt-2">
                         {
                             players.map(
