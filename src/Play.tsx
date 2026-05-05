@@ -30,14 +30,18 @@ export const Play: React.FC<PlayProps> = ({
         <>
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
-                    <h2 className="card-title">Game Over</h2>
+                    <h2 className="card-title">
+                        Play the game then...
+                    </h2>
                     <p
                         className="mt-1"
                     >
                         Save game result
                     </p>
-                    <div className="badge badge-accent badge-outline badge-lg">
-                        Email <span className="text-xl">⛭</span> (above) required
+                    <div 
+                        className="badge badge-ghost badge-sm font-normal ml-0"
+                    >
+                        Email <span className="text-xl">⚙</span> (above) required
                     </div>
                     <div className="flex flex-col gap-2 mt-2">
                         {
