@@ -117,14 +117,18 @@ export const Setup: React.FC<SetupProps> = ({
                         : 'Start Game'
                 }
             </button>
-            <button 
-                className="btn btn-md btn-link p-0 mt-0 me-3 mb-3 flex ml-auto"
-                onClick={
-                    () => nav(-1)
-                }
+            <div 
+                className="flex w-full lg:w-64"
             >
-                Cancel
-            </button>
+                <button 
+                    className="btn btn-md btn-link p-0 mt-0 me-3 mb-3 ml-auto"
+                    onClick={
+                        () => nav(-1)
+                    }
+                >
+                    Cancel
+                </button>
+            </div>
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
                     <h2 className="card-title">Add Player</h2>
