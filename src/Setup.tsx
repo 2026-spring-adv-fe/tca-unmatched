@@ -89,7 +89,7 @@ export const Setup: React.FC<SetupProps> = ({
             <div className="drawer-content">
             <>
             <button 
-                className="btn btn-primary btn-lg w-full lg:w-64 mb-4"
+                className="btn btn-primary btn-lg w-full lg:w-64 mb-0"
                 onClick={
                     () => {
                         setCurrentPlayers(
@@ -116,6 +116,14 @@ export const Setup: React.FC<SetupProps> = ({
                         ? 'Choose 2 Players'
                         : 'Start Game'
                 }
+            </button>
+            <button 
+                className="btn btn-md btn-link p-0 mt-0 me-3 mb-3 flex ml-auto"
+                onClick={
+                    () => nav(-1)
+                }
+            >
+                Cancel
             </button>
             <div className="card bg-base-100 w-full shadow-lg my-2">
                 <div className="card-body p-4 sm:p-6">
