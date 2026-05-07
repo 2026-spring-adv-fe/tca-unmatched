@@ -134,12 +134,19 @@ export const Home: React.FC<HomeProps> = ({
                                                     }
                                                     const isTied = (i > 0 && leaderboard[i - 1].avg === x.avg) || (i < leaderboard.length - 1 && leaderboard[i + 1]?.avg === x.avg);
                                                     const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    const isFirstPlace = trueRank === 1;
                                                     return (
                                                     <tr
                                                         key={x.name}
+                                                        className={isFirstPlace ? "leaderboard-first-place" : undefined}
                                                     >
-                                                        <th>
+                                                        <th className={isFirstPlace ? "leaderboard-first-place-rank" : undefined}>
                                                             { rankStr }
+                                                            {
+                                                                isFirstPlace
+                                                                    ? <span className="leaderboard-first-place-badge">1ST</span>
+                                                                    : null
+                                                            }
                                                         </th>
                                                         <td>
                                                             { x.wins }
@@ -150,7 +157,7 @@ export const Home: React.FC<HomeProps> = ({
                                                         <td>
                                                             { x.avg }
                                                         </td>
-                                                        <th>
+                                                        <th className={isFirstPlace ? "leaderboard-first-place-name" : undefined}>
                                                             { x.name }
                                                         </th>
                                                     </tr>
@@ -196,12 +203,19 @@ export const Home: React.FC<HomeProps> = ({
                                                     }
                                                     const isTied = (i > 0 && fighterLeaderboard[i - 1].avg === x.avg) || (i < fighterLeaderboard.length - 1 && fighterLeaderboard[i + 1]?.avg === x.avg);
                                                     const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    const isFirstPlace = trueRank === 1;
                                                     return (
                                                     <tr
                                                         key={x.name}
+                                                        className={isFirstPlace ? "leaderboard-first-place" : undefined}
                                                     >
-                                                        <th>
+                                                        <th className={isFirstPlace ? "leaderboard-first-place-rank" : undefined}>
                                                             { rankStr }
+                                                            {
+                                                                isFirstPlace
+                                                                    ? <span className="leaderboard-first-place-badge">1ST</span>
+                                                                    : null
+                                                            }
                                                         </th>
                                                         <td>
                                                             { x.wins }
@@ -212,7 +226,7 @@ export const Home: React.FC<HomeProps> = ({
                                                         <td>
                                                             { x.avg }
                                                         </td>
-                                                        <th>
+                                                        <th className={isFirstPlace ? "leaderboard-first-place-name" : undefined}>
                                                             { x.name }
                                                         </th>
                                                     </tr>

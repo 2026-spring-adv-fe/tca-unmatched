@@ -68,3 +68,77 @@
 [data-theme="dark"] .navbar {
     background-image: linear-gradient(90deg, #0a0e14 0%, #232132 100%);
 }
+
+[data-theme] .leaderboard-first-place {
+    position: relative;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--color-accent) 38%, var(--color-base-content));
+    background: linear-gradient(
+        105deg,
+        color-mix(in srgb, var(--color-accent) 26%, transparent) 0%,
+        color-mix(in srgb, var(--color-primary) 12%, transparent) 45%,
+        color-mix(in srgb, var(--color-accent) 20%, transparent) 100%
+    );
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 52%, transparent);
+    animation: first-place-shimmer 2.2s ease-in-out infinite;
+}
+
+[data-theme] .leaderboard-first-place-rank {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-heading);
+    font-size: 1.18rem;
+    letter-spacing: 0.04em;
+}
+
+[data-theme] .leaderboard-first-place-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+}
+
+[data-theme] .leaderboard-first-place-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    border-radius: 999px;
+    background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--color-accent) 88%, white) 0%,
+        color-mix(in srgb, var(--color-accent) 60%, var(--color-primary)) 100%
+    );
+    color: color-mix(in srgb, var(--color-neutral) 76%, black);
+    font-size: 0.7rem;
+    font-weight: 800;
+    line-height: 1;
+    padding: 0.2rem 0.5rem;
+    box-shadow: 0 6px 20px -10px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    animation: first-place-bounce 1.7s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+}
+
+@keyframes first-place-shimmer {
+    0%,
+    100% {
+        transform: translateZ(0) scale(1);
+        filter: saturate(1);
+    }
+    50% {
+        transform: translateZ(0) scale(1.01);
+        filter: saturate(1.18);
+    }
+}
+
+@keyframes first-place-bounce {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+    35% {
+        transform: translateY(-2px) scale(1.06);
+    }
+    65% {
+        transform: translateY(0) scale(1.01);
+    }
+}
