@@ -12,7 +12,8 @@ When a prompt is about changing the app's look and feel, keep the work focused o
 - `src/App.css`
 
 ## Rules
-
+- Never edit docs folder
+- Never do builds to verify changes
 - Prefer Tailwind utility classes and DaisyUI component classes in existing `className` props.
 - Use `src/index.css` for global theme tokens, DaisyUI theme variables, and app-wide visual defaults.
 - Use `src/App.css` only when a style needs app-specific CSS that does not fit cleanly in class names.
