@@ -12,6 +12,7 @@ When a prompt is about changing the app's look and feel, keep the work focused o
 - `src/App.css`
 
 ## Rules
+- Never do an npm run build
 - Never edit docs folder
 - Never do builds to verify changes
 - Prefer Tailwind utility classes and DaisyUI component classes in existing `className` props.
