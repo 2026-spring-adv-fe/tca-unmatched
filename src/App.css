@@ -68,3 +68,67 @@
 [data-theme="dark"] .navbar {
     background-image: linear-gradient(90deg, #0a0e14 0%, #232132 100%);
 }
+
+/* Radical first place leaderboard styles */
+@keyframes pulse-glow {
+    0%, 100% {
+        background-position: 0% 50%;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 165, 0, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 140, 0, 0.2);
+        transform: scale(1.02);
+    }
+}
+
+.first-place-row {
+    background: linear-gradient(
+        90deg,
+        #ffd700,
+        #ffed4e,
+        #ffa500,
+        #ff8c00,
+        #ffd700
+    );
+    background-size: 300% 300%;
+    animation: pulse-glow 2s ease-in-out infinite;
+    font-weight: 700;
+    position: relative;
+    isolation: isolate;
+}
+
+[data-theme="dark"] .first-place-row {
+    background: linear-gradient(
+        90deg,
+        #d4af37,
+        #ffed4e,
+        #f4a300,
+        #e67300,
+        #d4af37
+    );
+    background-size: 300% 300%;
+}
+
+.first-place-row td,
+.first-place-row th {
+    color: #1a0f00 !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+/* Continuous rotation animation for setup button */
+@keyframes spin-continuous {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-spin {
+    animation: spin-continuous 0.04s linear infinite;
+}
