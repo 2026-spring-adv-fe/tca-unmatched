@@ -62,7 +62,7 @@ export const Home: React.FC<HomeProps> = ({
                         </div>
 
                         <button 
-                            className="btn btn-primary btn-lg w-full lg:w-auto"
+                            className="btn btn-primary btn-lg w-full lg:w-auto spinning-button"
                             onClick={
                                 () => nav('/setup')
                             }
@@ -134,9 +134,11 @@ export const Home: React.FC<HomeProps> = ({
                                                     }
                                                     const isTied = (i > 0 && leaderboard[i - 1].avg === x.avg) || (i < leaderboard.length - 1 && leaderboard[i + 1]?.avg === x.avg);
                                                     const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    const isFirstPlace = trueRank === 1;
                                                     return (
                                                     <tr
                                                         key={x.name}
+                                                        className={isFirstPlace ? 'first-place-row' : ''}
                                                     >
                                                         <th>
                                                             { rankStr }
@@ -196,9 +198,11 @@ export const Home: React.FC<HomeProps> = ({
                                                     }
                                                     const isTied = (i > 0 && fighterLeaderboard[i - 1].avg === x.avg) || (i < fighterLeaderboard.length - 1 && fighterLeaderboard[i + 1]?.avg === x.avg);
                                                     const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
+                                                    const isFirstPlace = trueRank === 1;
                                                     return (
                                                     <tr
                                                         key={x.name}
+                                                        className={isFirstPlace ? 'first-place-row' : ''}
                                                     >
                                                         <th>
                                                             { rankStr }

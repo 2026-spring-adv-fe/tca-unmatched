@@ -68,3 +68,65 @@
 [data-theme="dark"] .navbar {
     background-image: linear-gradient(90deg, #0a0e14 0%, #232132 100%);
 }
+
+/* Radical First Place Leaderboard Styling */
+@keyframes flashy-gradient {
+    0% {
+        background-image: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #00ff87 100%);
+        box-shadow: 0 0 20px rgba(0, 255, 135, 0.6), 0 0 40px rgba(96, 239, 255, 0.4);
+    }
+    25% {
+        background-image: linear-gradient(135deg, #10e86c 0%, #4fd9eb 50%, #10e86c 100%);
+        box-shadow: 0 0 30px rgba(16, 232, 108, 0.7), 0 0 50px rgba(79, 217, 235, 0.5);
+    }
+    50% {
+        background-image: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #00ff87 100%);
+        box-shadow: 0 0 40px rgba(0, 255, 135, 0.8), 0 0 60px rgba(96, 239, 255, 0.6);
+    }
+    75% {
+        background-image: linear-gradient(135deg, #10e86c 0%, #4fd9eb 50%, #10e86c 100%);
+        box-shadow: 0 0 30px rgba(16, 232, 108, 0.7), 0 0 50px rgba(79, 217, 235, 0.5);
+    }
+    100% {
+        background-image: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #00ff87 100%);
+        box-shadow: 0 0 20px rgba(0, 255, 135, 0.6), 0 0 40px rgba(96, 239, 255, 0.4);
+    }
+}
+
+@keyframes pulse-scale {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.first-place-row {
+    animation: flashy-gradient 2s ease-in-out infinite, pulse-scale 2s ease-in-out infinite;
+    background-size: 200% 200%;
+    color: #001a0d !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    position: relative;
+}
+
+.first-place-row th,
+.first-place-row td {
+    color: #001a0d !important;
+    font-weight: 800 !important;
+}
+
+/* Radical Spinning Button */
+@keyframes spin-360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinning-button {
+    animation: spin-360 3s linear infinite;
+}
