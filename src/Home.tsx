@@ -126,20 +126,12 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             leaderboard.map(
-                                                (x, i) => {
-                                                    let trueRank = i + 1;
-                                                    for (let j = i - 1; j >= 0; j--) {
-                                                        if (leaderboard[j].avg === x.avg) trueRank = j + 1;
-                                                        else break;
-                                                    }
-                                                    const isTied = (i > 0 && leaderboard[i - 1].avg === x.avg) || (i < leaderboard.length - 1 && leaderboard[i + 1]?.avg === x.avg);
-                                                    const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
-                                                    return (
+                                                (x, i) => (
                                                     <tr
                                                         key={x.name}
                                                     >
                                                         <th>
-                                                            { rankStr }
+                                                            { x.rank }
                                                         </th>
                                                         <td>
                                                             { x.wins }
@@ -154,8 +146,7 @@ export const Home: React.FC<HomeProps> = ({
                                                             { x.name }
                                                         </th>
                                                     </tr>
-                                                    );
-                                                }
+                                                )
                                             )
                                         }
                                     </tbody>
@@ -188,20 +179,12 @@ export const Home: React.FC<HomeProps> = ({
                                     <tbody>
                                         {
                                             fighterLeaderboard.map(
-                                                (x, i) => {
-                                                    let trueRank = i + 1;
-                                                    for (let j = i - 1; j >= 0; j--) {
-                                                        if (fighterLeaderboard[j].avg === x.avg) trueRank = j + 1;
-                                                        else break;
-                                                    }
-                                                    const isTied = (i > 0 && fighterLeaderboard[i - 1].avg === x.avg) || (i < fighterLeaderboard.length - 1 && fighterLeaderboard[i + 1]?.avg === x.avg);
-                                                    const rankStr = isTied ? `T${trueRank}` : `${trueRank}`;
-                                                    return (
+                                                (x, i) => (
                                                     <tr
                                                         key={x.name}
                                                     >
                                                         <th>
-                                                            { rankStr }
+                                                            { x.rank }
                                                         </th>
                                                         <td>
                                                             { x.wins }
@@ -216,8 +199,7 @@ export const Home: React.FC<HomeProps> = ({
                                                             { x.name }
                                                         </th>
                                                     </tr>
-                                                    );
-                                                }
+                                                )
                                             )
                                         }
                                     </tbody>

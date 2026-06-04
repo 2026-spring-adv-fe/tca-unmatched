@@ -21,6 +21,7 @@ export type LeaderboardEntry = {
     losses: number;
     avg: string;
     name: string;
+    rank: string;
 };
 
 export type GeneralFacts = {
@@ -82,23 +83,24 @@ export const getGeneralFacts = (games: GameResult[]): GeneralFacts => {
 
 export const getLeaderboard = (
     games: GameResult[]
-): LeaderboardEntry[] => getPreviousPlayers(games)
-    .map(
-        x => ({
-            ...getLeaderboardEntry(
-                games,
-                x,
-            )
-        })
-    )
-    .sort(
-        (a, b) => a.avg == b.avg
-            ? a.wins == 0 && b.wins == 0
-                ? (a.wins + a.losses) - (b.wins + b.losses)
-                : (b.wins + b.losses) - (a.wins + a.losses)
-            : Number.parseFloat(b.avg) - Number.parseFloat(a.avg)
-    )
-;
+): LeaderboardEntry[] => applyRanks(
+    getPreviousPlayers(games)
+        .map(
+            x => ({
+                ...getLeaderboardEntry(
+                    games,
+                    x,
+                )
+            })
+        )
+        .sort(
+            (a, b) => a.avg == b.avg
+                ? a.wins == 0 && b.wins == 0
+                    ? (a.wins + a.losses) - (b.wins + b.losses)
+                    : (b.wins + b.losses) - (a.wins + a.losses)
+                : Number.parseFloat(b.avg) - Number.parseFloat(a.avg)
+        )
+);
 
 export const getPreviousPlayers = (
     games: GameResult[]
@@ -121,23 +123,24 @@ export const getPreviousPlayers = (
 
 export const getFighterLeaderboard = (
     games: GameResult[]
-): LeaderboardEntry[] => getPreviousFighters(games)
-    .map(
-        x => ({
-            ...getFighterLeaderboardEntry(
-                games,
-                x,
-            )
-        })
-    )
-    .sort(
-        (a, b) => a.avg == b.avg
-            ? a.wins == 0 && b.wins == 0
-                ? (a.wins + a.losses) - (b.wins + b.losses)
-                : (b.wins + b.losses) - (a.wins + a.losses)
-            : Number.parseFloat(b.avg) - Number.parseFloat(a.avg)
-    )
-;
+): LeaderboardEntry[] => applyRanks(
+    getPreviousFighters(games)
+        .map(
+            x => ({
+                ...getFighterLeaderboardEntry(
+                    games,
+                    x,
+                )
+            })
+        )
+        .sort(
+            (a, b) => a.avg == b.avg
+                ? a.wins == 0 && b.wins == 0
+                    ? (a.wins + a.losses) - (b.wins + b.losses)
+                    : (b.wins + b.losses) - (a.wins + a.losses)
+                : Number.parseFloat(b.avg) - Number.parseFloat(a.avg)
+        )
+);
 
 export const getPreviousFighters = (
     games: GameResult[]
@@ -223,10 +226,23 @@ export const getReverseChronGameData = (results: GameResult[]) => results
 //
 // Helper funcs...
 //
+const applyRanks = (entries: Omit<LeaderboardEntry, 'rank'>[]): LeaderboardEntry[] =>
+    entries.map((x, i, arr) => {
+        let trueRank = i + 1;
+        for (let j = i - 1; j >= 0; j--) {
+            if (arr[j].avg === x.avg) trueRank = j + 1;
+            else break;
+        }
+        const isTied =
+            (i > 0 && arr[i - 1].avg === x.avg) ||
+            (i < arr.length - 1 && arr[i + 1]?.avg === x.avg);
+        return { ...x, rank: isTied ? `T${trueRank}` : `${trueRank}` };
+    });
+
 const getFighterLeaderboardEntry = (
     games: GameResult[],
     fighter: string,
-): LeaderboardEntry => {
+): Omit<LeaderboardEntry, 'rank'> => {
 
     const countOfWins = games.filter(
         x => x.players.some(
@@ -269,7 +285,7 @@ const formatLastPlayed = durationFormatter<string>(
 const getLeaderboardEntry = (
     games: GameResult[],
     player: string,
-): LeaderboardEntry => {
+): Omit<LeaderboardEntry, 'rank'> => {
 
     const countOfWins = games.filter(
         x => x.winner == player
